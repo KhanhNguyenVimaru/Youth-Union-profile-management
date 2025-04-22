@@ -1,0 +1,211 @@
+:root{
+    --mainBlue : #2832c2;
+    --baseFont : bahnschrift;
+    --fontGray : #6a6a6a;
+    --backGroundGray : #dddddd;
+    --whiteGray : #f2f3f5;
+    --footer : #27304D;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    min-height: 300vh;
+    background-color: var(--whiteGray);
+}
+#picture-container{
+    height: 70vh;
+    background-size: cover  ;
+}
+#info-container{
+    height: 115vh;
+    width: 100%;
+    background-color: white;
+    display: flex;
+}
+#introduce-title{
+    height: 10vh;
+    background-color: var(--whiteGray);
+}
+#introduce-title span{
+    font-family: var(--baseFont);
+    font-size: 20px;
+    margin-left: 45px;
+    font-weight: bolder;
+}
+#Introduce p{
+    font-family: var(--baseFont);
+    font-size: 16px;
+    height:auto;
+}
+#Introduce h4{
+    font-family: var(--baseFont);
+    margin: 20px;
+    margin-left: 0;
+}
+#Introduce{
+    height: auto;
+    width: 40%;
+    padding: 20px;
+    margin-left: 20px;
+}
+#info-pic-container{
+    width: 50%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: 15px;
+}
+#YouthUnionPics{
+    margin-top: 35px;
+}
+#picture-container-info{
+    display: flex;
+    align-items: center;
+}
+
+.option-selection {
+    width: 150px;
+    height: 150px;
+    border-radius: 10%;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font_defaut);
+    font-size: small;
+    color: var(--secondaryDarkBlue);
+    font-weight: bold;
+    position: relative; /* Required for pseudo-elements */
+    overflow: hidden; /* Ensure water waves stay inside */
+
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng nhẹ */
+
+
+    cursor: pointer;
+}
+.option-selection i {
+    font-size: 55px;
+    color: var(--secondaryDarkBlue);
+    position: relative; /* Ensure icon stays above water effect */
+    z-index: 2; /* Ensure icon is above water waves */
+}
+.option-selection span {
+    position: relative; /* Ensure text stays above water effect */
+    z-index: 2; /* Ensure text is above water waves */
+}
+.option-selection:hover {
+    transform: scale(1.05);
+    transition: 0.5s ease-in-out;
+}
+.option-selection::before,
+.option-selection::after {
+    content: "";
+    position: absolute;
+    width: 200%; /* Larger than parent to create wave effect */
+    height: 200%;
+    top: -50%; /* Start above the visible area */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgb(79 107 165 / 45%); /* Semi-transparent blue wave */
+    z-index: 1; /* Ensure waves are below content */
+}
+
+.option-selection::after {
+    border-radius: 45%; /* Elliptical shape for wave */
+    animation: water-wave 4s linear infinite; /* Animation for wave */
+}
+
+.option-selection::before {
+    border-radius: 35%; /* Slightly different shape for variation */
+    background: rgb(198 205 231 / 42%); /* Lighter wave */
+    animation: water-wave 4s linear infinite; /* Same animation with slight delay */
+    animation-delay: 0.5s; /* Add delay for a layered effect */
+}
+
+/* Water wave animation */
+@keyframes water-wave {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+        top: -30%;
+    }
+    50% {
+        top: -50%;
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+        top: -30%;
+    }
+}
+#option{
+    margin: 50px;
+    width: 800px;
+}
+
+@media (max-width: 768px) {
+    .intro-content {
+        font-size: 15px; /* Chữ nhỏ hơn để dễ đọc */
+        padding: 15px; /* Tăng khoảng cách giữa các đoạn */
+    }
+    #first-Introduce p{
+        font-size: 15px;
+    }
+    #option{
+        width: auto;
+    }
+}
+#selection-container{
+    display: flex;
+    align-items: center;
+    justify-self: center;
+}
+#selection-container{
+    height: 50vh;
+    margin: 0;
+    margin-bottom: 20vh;
+}
+#selection-title{
+    color: black;
+    font-family: var(--baseFont);
+    width: 200%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-direction: column;
+}
+.col-md-3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#footer{
+    height: 70vh;
+    background-color: var(--footer) !important;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+
+}
+.footer-container{
+    height: 80%;
+    width: 32%;
+    padding: 10px;
+    font-family: var(--baseFont);
+    color: white;
+}
+.footer-container h5{
+    margin: 20px 0;
+    font-weight: bolder;
+}
+.footer-container a{
+    text-decoration: none;
+    color: white;
+}
+.footer-container i{
+    margin-right: 5 px;
+}
+#footer-list-container{
+    padding-left: 70px;
+}

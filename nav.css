@@ -1,0 +1,61 @@
+:root{
+    --mainBlue : #2832c2;
+    --baseFont : bahnschrift;
+    --fontGray : #6a6a6a;
+}
+
+#seach-container{
+    display: flex;
+    margin-left: auto;
+}
+#navbar-container{
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 10vh;
+    background-color: white !important;
+    font-family: var(--baseFont);
+}
+.nav-link{
+    color: var(--fontGray);
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#nav-logo{
+    color: var(--mainBlue)  ;
+    font-family: var(--baseFont);
+    font-weight: bolder;
+    margin-left: 25px;
+    font-size: 22px;
+}
+#contact-container{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #f6f6f6    ;
+}
+.contact-element{
+    display: flex;
+    font-family: var(--baseFont);
+    color: #6a6a6a;
+    font-size: 16px;
+}
+#contact{
+    height: 60%;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    margin-left: 25px;
+}
+#address-info{
+    margin-right: 25px;
+}
+
+#intro-container-2{
+    padding: 0;
+}
+a{
+    cursor: pointer;
+}
