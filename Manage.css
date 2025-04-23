@@ -8,7 +8,7 @@
 body{
     margin: 0;
     padding: 0;
-    height: 290vh;
+    height: 110vh;
     background-color: var(--whiteGray);
 }
 #content{
@@ -17,7 +17,7 @@ body{
     background-color: var(--whiteGray) ;
 }
 #user-management{
-    height: 90vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -91,13 +91,11 @@ body{
     height: 40px;
     border: none;
     font-family: var(--baseFont) !important;
-    margin-left: 5px;
     color: var(--fontGray);
-    width: 98%;
+    width: 49%;
     background-color: var(--whiteGray);
     transition: 0.2s ease-in-out;
     border-radius: 5px;
-    margin: 0 auto;
 }
 #reset-data-list:active{
     transform: scale(0.9);
@@ -108,4 +106,20 @@ body{
     margin-left: 32px;
     margin-bottom: 20px;
     color: var(--fontGray);
+}
+#search-filter{
+    height: 40px;
+    width: 49%;
+    border: none;
+    background-color: var(--whiteGray);
+    font-family: var(--baseFont);
+
+}
+#new-user-btn{
+    height: 40px;
+    width: 98%;
+    border: none;
+    background: var(--whiteGray);
+    font-family: var(--baseFont);
+    color: #6a6a6a;
 }

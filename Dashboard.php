@@ -62,6 +62,7 @@
         </div>
         <div id="info-pic-container">
             <hr width="80%">
+            <h4>HÌNH ẢNH</h4>
             <div id="YouthUnionPics" class="carousel slide" data-bs-ride="carousel">
                 <!-- Chấm tròn chỉ báo -->
                 <div class="carousel-indicators">
@@ -123,6 +124,23 @@
                 <i class="bi bi-facebook"></i> Trang Facebook chính thức của Đoàn thanh niên trường Đại học Hàng hải Việt Nam
             </a>
         </div>
+        <div class="footer-container" id = "footer-role-intro">
+            <h5>Trang web này dành cho</h5>
+            <hr style="width: 80%">
+            <ul>
+                <li>Đoàn viên trường Đại học Hàng hải Việt Nam</li>
+                <li>Quản lý đoàn viên</li>
+                <li>Cán bộ Đoàn</li>
+            </ul>
+
+            <h5 style="margin-top: 40px;">Chức năng</h5>
+            <hr style="width: 80%">
+            <ul>
+                <li><a href="">Quản lý hồ sơ Đoàn viên</a></li>
+                <li><a href="">Thông báo tin tức</a></li>
+                <li><a href="">Hoạt động Đoàn</a></li>
+            </ul>
+        </div>
         <div class="footer-container" id = "footer-list-container">
             <h5>Các liên chi Đoàn thanh niên</h5>
             <hr style="width: 80%">
@@ -140,23 +158,6 @@
                 <li>Liên chi đoàn Viện Đào tạo quốc tế</li>
                 <li>Liên chi đoàn Viện Đào tạo chất lượng cao</li>
                 <li>Liên chi đoàn Khoa Quản trị Tài chính</li>
-            </ul>
-        </div>
-        <div class="footer-container">
-            <h5>Trang web này dành cho</h5>
-            <hr style="width: 80%">
-            <ul>
-                <li>Đoàn viên trường Đại học Hàng hải Việt Nam</li>
-                <li>Quản lý đoàn viên</li>
-                <li>Cán bộ Đoàn</li>
-            </ul>
-
-            <h5 style="margin-top: 40px;">Chức năng</h5>
-            <hr style="width: 80%">
-            <ul>
-                <li><a href="">Quản lý hồ sơ Đoàn viên</a></li>
-                <li><a href="">Thông báo tin tức</a></li>
-                <li><a href="">Hoạt động Đoàn</a></li>
             </ul>
         </div>
     </div>

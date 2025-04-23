@@ -24,12 +24,33 @@
                 <input type="text" name="search" id="search-user" placeholder="Nhập thông tin">
                 <button id="search-btn">Tìm kiếm</button>
             </div>
-            <div class="search-container" style="display: flex; flex-direction:column;" id = "input-filter">
+            <div class="search-container" style="display: flex; flex-direction:column;" id="input-filter">
                 <select name="class-list" id="class-list">
                     <option value="none">Chọn lớp</option>
-                    <option value="CNT">CNT</option>
-                    <option value="KPM">KPM</option>
-                    <option value="TTM">TTM</option>
+                    <optgroup label="Khoa Công nghệ thông tin">
+                        <option value="cnt">CNT</option>
+                        <option value="kpm">KPM</option>
+                        <option value="ttm">TTM</option>
+                    </optgroup>
+
+                    <optgroup label="Khoa Hàng hải">
+                        <option value="hh">HH</option>
+                    </optgroup>
+
+                    <optgroup label="Khoa Kinh tế">
+                        <option value="ktb">KTB</option>
+                        <option value="ktn">KTN</option>
+                        <option value="ktl">KTL</option>
+                        <option value="ktc">KTC</option>
+                        <option value="kth">KTH</option>
+                    </optgroup>
+
+                    <optgroup label="Khoa Quản trị - Tài chính">
+                        <option value="qkt">QKT</option>
+                        <option value="qkd">QKD</option>
+                        <option value="qtc">QTC</option>
+                    </optgroup>
+
                 </select>
                 <select name="aca-year" id="aca-year">
                     <option value="none">Chọn khóa</option>
@@ -45,11 +66,29 @@
                     <option value="qt_taichinh">Khoa Quản trị - Tài chính</option>
                 </select>
                 <hr style="width: 96%; margin: 10px auto">
-                <button id = "reset-data-list">Reset dữ liệu bảng</button>
+                <div style="display: flex; width: 100%; justify-content:space-between">
+                    <button id="reset-data-list">Reset dữ liệu bảng</button>
+                    <select name="search-filter" id="search-filter">
+                        <option value="" class="opt-filter">
+                            <i class="bi bi-filter"></i>
+                            Filter
+                        </option>
+                        <option value="class_name" class="opt-filter">Theo lớp</option>
+                        <option value="year-in" class="opt-filter">Theo khóa</option>
+                        <option value="group" class="opt-filter">Theo chi đoàn</option>
+                        <option value="class_name" class="opt-filter">Theo thời gian</option>
+                        <option value="year-in" class="opt-filter">Theo vai trò</option>
+                    </select>
+                </div>
+                <hr style="width: 96%; margin: 10px auto; margin-top:20px">
+                <button id = "new-user-btn">
+                    <i class="bi bi-plus-square" style="margin-right: 5px;"></i>
+                    Thêm người dùng mới
+                </button>
             </div>
         </div>
         <div class="user-management-div" id="show-users-list">
-            
+
         </div>
     </div>
 </body>

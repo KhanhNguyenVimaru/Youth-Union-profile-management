@@ -10,7 +10,6 @@
 body{
     margin: 0;
     padding: 0;
-    min-height: 300vh;
     background-color: var(--whiteGray);
 }
 #picture-container{
@@ -194,6 +193,7 @@ body{
     padding: 10px;
     font-family: var(--baseFont);
     color: white;
+    margin-left: 40px;
 }
 .footer-container h5{
     margin: 20px 0;
@@ -206,6 +206,6 @@ body{
 .footer-container i{
     margin-right: 5 px;
 }
-#footer-list-container{
-    padding-left: 70px;
+#footer-role-intro{
+    padding-left: 30px;
 }
