@@ -89,7 +89,7 @@
             <div id="database-handle">
                 <h5>DANH SÁCH TÀI KHOẢN</h5>
                 <div style="margin-left: auto;">
-                    <button type="button" class="btn btn-primary" onclick="loadSignUpModal()" id="insert-user-btn">
+                    <button type="button" class="btn btn-primary" onclick="loadSignUpModal()" id="call-modal-signin">
                         <i class="bi bi-person-plus"></i>
                         Thêm thành viên
                     </button>

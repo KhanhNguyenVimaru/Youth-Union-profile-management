@@ -1,25 +1,60 @@
 document.getElementById("insert-user-btn").addEventListener("click", function () {
-    let id = document.getElementById("new_users_id").value;
-    let ten = document.getElementById("new_users_name").value;
+    let id = document.getElementById("new_users_id").value.trim();
+    let ten = document.getElementById("new_users_name").value.trim();
+
+    // pass
     let pass = document.getElementById("new_users_password");
     let confirm = document.getElementById("confirm_password");
-    if (id == "" || ten == "") {
-        alert("Hãy điền tất cả các trường dữ liệu");
-        id = "";
-        ten = "";
-        pass.value = "";
+    // confirm
+
+
+    let email = document.getElementById("get-user-email").value.trim();
+    let phone = document.getElementById("get-user-tel").value.trim();
+    let gender = document.getElementById("gender").value;
+    let userClass = document.getElementById("get-class-list").value;
+    let department = document.getElementById("get-depart").value;
+    let role = document.getElementById("get-role").value;
+    let birthdate = document.getElementById("get-birthdate").value;
+
+    if (!id || !ten || !email || !phone || gender === "none" || userClass === "0" || department === "none" || role === "none" || birthdate === "") {
+        alert("Vui lòng điền đầy đủ tất cả các trường!");
+        return;
     }
 
-    if (confirmPassWord(pass, confirm)) {
-        password = pass.value;
-        let user = {
-            id, ten, password
-        }
-        insertUser(user);
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        alert("Email không hợp lệ!");
+        return;
     }
 
+    const phonePattern = /^[0-9]{10}$/;
+    if (!phonePattern.test(phone)) {
+        alert("Số điện thoại không hợp lệ! Vui lòng nhập 10 chữ số.");
+        return;
+    }
 
-})
+    if (!confirmPassWord(pass, confirm)) {
+        alert("Mật khẩu xác nhận không khớp!");
+        return;
+    }
+
+    let user = {
+        id: id,
+        ten: ten,
+        password: pass.value,
+        email: email,
+        phone: phone,
+        gender: gender,
+        userClass: userClass,
+        department: department,
+        role: role,
+        birthdate : birthdate
+        
+    };
+    console.log(user);
+
+    insertUser(user);
+});
 function confirmPassWord(passInput, confirmInput) {
     const pass = passInput.value;
     const confirm = confirmInput.value;

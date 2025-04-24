@@ -1,5 +1,5 @@
-<?php
-header('Content-Type: application/json');
+<?php 
+header('Content-Type: application/json');   
 
 $servername = "localhost";
 $user = "root";
@@ -11,30 +11,50 @@ if ($conn->connect_error) {
     echo json_encode(["success" => false, "message" => "Lỗi kết nối với server"]);
     exit;
 }
+
 $data = json_decode(file_get_contents("php://input"), true);
-if (!$data || !isset($data['ten'], $data['id'], $data['password'])) {
-    echo json_encode(["success" => false, "message" => "Dữ liệu không hợp lệ hoặc thiếu"]);
-    exit;
+
+$required_fields = ['ten', 'id', 'password', 'email', 'phone', 'gender', 'birthdate', 'userClass', 'department', 'role'];
+foreach ($required_fields as $field) {
+    if (!isset($data[$field]) || empty(trim($data[$field]))) {
+        echo json_encode(["success" => false, "message" => "Thiếu dữ liệu trường: $field"]);
+        exit;
+    }
 }
 
-$name = $data['ten'];
+$name = trim($data['ten']);
 $id = $data['id'];
 $pass = $data['password'];
+$email = trim($data['email']);
+$phone = trim($data['phone']);
+$gender = $data['gender'];
+$birth = $data['birthdate'];
+$userClass = $data['userClass']; 
+$department = $data['department'];
+$chidoan = $department[0]; 
+$role = $data['role']; 
+
 $hash_pass = password_hash($pass, PASSWORD_DEFAULT);
 
 if (available($conn, $id)) {
-    $username = account_name($name, $id);
-    $stmt = $conn->prepare("INSERT INTO users (id, username, password, ho_ten) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("isss", $id, $username, $hash_pass, $name);
-
-    if ($stmt->execute()) {
-        echo json_encode(["success" => true, "message" => "Thêm tài khoản thành công"]);
-    } else {
-        echo json_encode(["success" => false, "message" => "Thêm tài khoản không thành công: " . $stmt->error]);
-    }
-
-    $stmt->close();
+    echo json_encode(["success" => false, "message" => "Mã sinh viên đã tồn tại"]);
+    exit;
 }
+
+$username = account_name($name, $id);
+
+$stmt = $conn->prepare("INSERT INTO doanvien (id, ho_ten, gioi_tinh, ngay_sinh, lop_id, chidoan_id, khoa, email, sdt, chuc_vu)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("isssiissss", $id, $name, $gender, $birth, $userClass, $chidoan, $department, $email, $phone, $role);
+
+if ($stmt->execute()) {
+    echo json_encode(["success" => true, "message" => "Thêm tài khoản thành công"]);
+} else {
+    echo json_encode(["success" => false, "message" => "Lỗi khi thêm tài khoản: " . $stmt->error]);
+}
+
+$stmt->close();
+$conn->close();
 
 function account_name($name, $id)
 {
@@ -45,9 +65,11 @@ function account_name($name, $id)
 
 function available($conn, $id)
 {
-    $sql_selectid = "SELECT * FROM users WHERE id = ?";
-    $stmt = $conn->prepare($sql_selectid);
+    $sql = "SELECT id FROM doanvien WHERE id = ?";
+    $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
-    return $check_available = $stmt->get_result();
+    $result = $stmt->get_result();
+    return $result->num_rows > 0;
 }
+?>

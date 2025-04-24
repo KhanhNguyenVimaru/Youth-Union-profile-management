@@ -131,7 +131,7 @@ body{
     margin-left: 0 !important;
     margin-right: 0 !important;
 }
-#insert-user-btn{
+#call-modal-signin{
     margin-right: 10px !important;
     margin-left: auto;
 }
@@ -146,4 +146,7 @@ body{
     margin-left: 20px;
     color: var(--fontGray);
     font-family: var(--baseFont);
+}
+#send-user-data{
+    margin-left: auto;
 }
