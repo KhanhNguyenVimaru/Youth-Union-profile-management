@@ -26,32 +26,27 @@ body{
     height: 94%;
     background-color: white;
     border-radius: 5px;
+    width: 100%;
 }
 #show-user-data{
     width: 26%;
-    padding-top: 40px;
+    padding-top: 30px;
 }
 #show-users-list{
     width: 70%;
 }
-.search-container{
-    height: 50px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
+
 #search-user{
-    width: 60%;
+    width: 100%;
     height: 40px;
     padding: 7px;
     background-color: var(--whiteGray);
     border: none;
     padding-left: 20px;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
+
 #search-user::placeholder{
     font-family: var(--baseFont);
     font-size: 16px;
@@ -62,10 +57,11 @@ body{
     font-family: var(--baseFont) !important;
     margin-left: 5px;
     color: var(--fontGray);
-    width: 100px;
+    width: 100%;
     background-color: var(--whiteGray);
     transition: 0.2s ease-in-out;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 #search-btn:active{
@@ -92,10 +88,11 @@ body{
     border: none;
     font-family: var(--baseFont) !important;
     color: var(--fontGray);
-    width: 49%;
+    width: 100%;
     background-color: var(--whiteGray);
     transition: 0.2s ease-in-out;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 #reset-data-list:active{
     transform: scale(0.9);
@@ -104,22 +101,49 @@ body{
     color: black;
     font-family: var(--baseFont);
     margin-left: 32px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     color: var(--fontGray);
 }
 #search-filter{
     height: 40px;
-    width: 49%;
+    width: 100%;
     border: none;
     background-color: var(--whiteGray);
     font-family: var(--baseFont);
 
 }
-#new-user-btn{
-    height: 40px;
-    width: 98%;
-    border: none;
-    background: var(--whiteGray);
+
+#input-filter i{
     font-family: var(--baseFont);
-    color: #6a6a6a;
+    color: var(--fontGray);
+    margin-right: 7px !important;
+}
+#database-handle{
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#show-users-list button{
+    margin: 20px;
+}
+#reset-list-btn{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+#insert-user-btn{
+    margin-right: 10px !important;
+    margin-left: auto;
+}
+#show-users-list h5{
+    color: var(--fontGray);
+    font-family: var(--baseFont);
+    margin-top: 10px;
+}
+.label-insert-modal{
+    width: 86%;
+    display: flex;
+    margin-left: 20px;
+    color: var(--fontGray);
+    font-family: var(--baseFont);
 }

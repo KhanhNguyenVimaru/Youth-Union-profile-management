@@ -1,0 +1,25 @@
+:root{
+    --mainBlue : #2832c2;
+    --baseFont : bahnschrift;
+    --fontGray : #6a6a6a;
+    --backGroundGray : #dddddd;
+    --whiteGray : #f2f3f5;
+    --footer : #27304D;
+}
+.form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.manage_modal input{
+    width: 80%;
+    height: 40px;
+    margin: 10px;
+    padding: 10px;
+    font-family: var(--baseFont);
+    color: #6a6a6a;
+    border-radius: 5px;
+    border: 1px solid var(--fontGray);
+}

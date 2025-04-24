@@ -10,21 +10,20 @@
     <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/vi/0/09/Huy_Hi%E1%BB%87u_%C4%90o%C3%A0n.png">
     <link rel="stylesheet" href="nav.css">
     <link rel="stylesheet" href="Manage.css">
+    <link rel="stylesheet" href="manage_modal.css">
     <title>Hồ sơ Đoàn viên</title>
 </head>
 
 <body>
     <!-- nav bar here -->
     <?php include "Navbar.php" ?>
+    <?php include "manage_modal.php" ?>
     <div class="container-fluid" id="user-management">
         <div class="user-management-div" id="show-user-data">
             <h5>QUẢN LÝ ĐOÀN VIÊN</h5>
 
-            <div class="search-container">
-                <input type="text" name="search" id="search-user" placeholder="Nhập thông tin">
-                <button id="search-btn">Tìm kiếm</button>
-            </div>
             <div class="search-container" style="display: flex; flex-direction:column;" id="input-filter">
+                <input type="text" name="search" id="search-user" placeholder="Nhập thông tin">
                 <select name="class-list" id="class-list">
                     <option value="none">Chọn lớp</option>
                     <optgroup label="Khoa Công nghệ thông tin">
@@ -65,9 +64,7 @@
                     <option value="cntt">Khoa Công nghệ thông tin</option>
                     <option value="qt_taichinh">Khoa Quản trị - Tài chính</option>
                 </select>
-                <hr style="width: 96%; margin: 10px auto">
                 <div style="display: flex; width: 100%; justify-content:space-between">
-                    <button id="reset-data-list">Reset dữ liệu bảng</button>
                     <select name="search-filter" id="search-filter">
                         <option value="" class="opt-filter">
                             <i class="bi bi-filter"></i>
@@ -81,18 +78,33 @@
                     </select>
                 </div>
                 <hr style="width: 96%; margin: 10px auto; margin-top:20px">
-                <button id = "new-user-btn">
-                    <i class="bi bi-plus-square" style="margin-right: 5px;"></i>
-                    Thêm người dùng mới
+                <button id="search-btn">
+                    <i class="bi bi-search"></i>
+                    Tìm kiếm
                 </button>
+
             </div>
         </div>
         <div class="user-management-div" id="show-users-list">
-
+            <div id="database-handle">
+                <h5>DANH SÁCH TÀI KHOẢN</h5>
+                <div style="margin-left: auto;">
+                    <button type="button" class="btn btn-primary" onclick="loadSignUpModal()" id="insert-user-btn">
+                        <i class="bi bi-person-plus"></i>
+                        Thêm thành viên
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="reset-list-btn">
+                        <i class="bi bi-arrow-clockwise"></i>
+                        Reset
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 <script src="index.js"></script>
+<script src="call_modal.js"></script>
+<script src="manage_user.js"></script>
 
 </html>
