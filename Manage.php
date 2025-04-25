@@ -19,73 +19,7 @@
     <?php include "Navbar.php" ?>
     <?php include "manage_modal.php" ?>
     <div class="container-fluid" id="user-management">
-        <div class="user-management-div" id="show-user-data">
-            <h5>QUẢN LÝ ĐOÀN VIÊN</h5>
 
-            <div class="search-container" style="display: flex; flex-direction:column;" id="input-filter">
-                <input type="text" name="search" id="search-user" placeholder="Nhập thông tin" style="background-color: white;">
-                <label for="class-list" id = "label-div">Bộ lọc tìm kiếm</label>
-                <select name="class-list" id="class-list">
-                    <option value="none">Chọn lớp</option>
-                    <optgroup label="Khoa Công nghệ thông tin">
-                        <option value="cnt">CNT</option>
-                        <option value="kpm">KPM</option>
-                        <option value="ttm">TTM</option>
-                    </optgroup>
-
-                    <optgroup label="Khoa Hàng hải">
-                        <option value="hh">HH</option>
-                    </optgroup>
-
-                    <optgroup label="Khoa Kinh tế">
-                        <option value="ktb">KTB</option>
-                        <option value="ktn">KTN</option>
-                        <option value="ktl">KTL</option>
-                        <option value="ktc">KTC</option>
-                        <option value="kth">KTH</option>
-                    </optgroup>
-
-                    <optgroup label="Khoa Quản trị - Tài chính">
-                        <option value="qkt">QKT</option>
-                        <option value="qkd">QKD</option>
-                        <option value="qtc">QTC</option>
-                    </optgroup>
-
-                </select>
-                <select name="aca-year" id="aca-year">
-                    <option value="none">Chọn khóa</option>
-                    <option value="63">63</option>
-                    <option value="64">64</option>
-                    <option value="65">65</option>
-                </select>
-                <select name="uni-branch" id="uni-branch">
-                    <option value="none">Chi đoàn</option>
-                    <option value="hanghai">Khoa Hàng hải</option>
-                    <option value="kinhte">Khoa Kinh tế</option>
-                    <option value="cntt">Khoa Công nghệ thông tin</option>
-                    <option value="qt_taichinh">Khoa Quản trị - Tài chính</option>
-                </select>
-                <div style="display: flex; width: 100%; justify-content:space-between">
-                    <select name="search-filter" id="search-filter">
-                        <option value="" class="opt-filter">
-                            <i class="bi bi-filter"></i>
-                            Filter
-                        </option>
-                        <option value="class_name" class="opt-filter">Theo lớp</option>
-                        <option value="year-in" class="opt-filter">Theo khóa</option>
-                        <option value="group" class="opt-filter">Theo chi đoàn</option>
-                        <option value="class_name" class="opt-filter">Theo thời gian</option>
-                        <option value="year-in" class="opt-filter">Theo vai trò</option>
-                    </select>
-                </div>
-                <hr style="width: 96%; margin: 10px auto; margin-top:20px">
-                <button id="search-btn">
-                    <i class="bi bi-search"></i>
-                    Tìm kiếm
-                </button>
-
-            </div>
-        </div>
         <div class="user-management-div" id="show-users-list">
             <div id="database-handle">
                 <h5>DANH SÁCH TÀI KHOẢN</h5>
@@ -94,26 +28,44 @@
                         <i class="bi bi-person-plus"></i>
                         Thêm thành viên
                     </button>
-                    <button type="button" class="btn btn-secondary" id="reset-list-btn">
+                    <button type="button" class="btn btn-secondary" id="reset-list-btn" onclick="resetPage()">
                         <i class="bi bi-arrow-clockwise"></i>
                         Reset
+                    </button>
+                    <button type="button" class="btn btn-secondary" style="margin-left: 10px;" id="filter-list-btn" onclick="loadFilter()">
+                        <i class="bi bi-filter"></i>
+                        Filter
                     </button>
                 </div>
             </div>
             <div id="users-data-container">
                 <table class="table table-hover" id="users-data-board">
                     <thead>
-                        <tr class = "table-col">
+                        <tr class="table-col">
                             <th scope="col">MSV</th>
                             <th scope="col">Họ tên</th>
+                            <th scope="col">Ngày sinh</th>
                             <th scope="col">Lớp</th>
                             <th scope="col">Chi đoàn</th>
                             <th scope="col">Email</th>
                         </tr>
                     </thead>
-                <tbody id = "show-data-here">
-                        <?php include "select_users.php" ?>
-                </tbody>
+                    <tbody id="show-data-here">
+                        <?php include "select_users.php"; ?>
+                    </tbody>
+                </table>
+                <div style="align-self: end">
+                    <nav aria-label="Page navigation" id="page-div">
+                        <ul class="pagination" style="margin: 0;">
+                            <?php
+                            for ($i = 1; $i <= $total_pages; $i++) {
+                                $active = ($i == $page) ? 'active' : '';
+                                echo '<li class="page-item ' . $active . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                            }
+                            ?>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
@@ -149,6 +101,18 @@
             classSelect.selectedIndex = 0;
         }
     });
+</script>
+<script>
+    window.addEventListener('scroll', function() {
+        var div = document.getElementById('floatingDiv');
+        var scrollTop = window.scrollY || window.pageYOffset;
+        div.style.top = (100 + scrollTop) + 'px'; // giữ khoảng cách 100px với đầu trang
+    });
+</script>
+<script>
+    function resetPage(){
+        window.location.reload();
+    }
 </script>
 
 </html>

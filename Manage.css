@@ -8,32 +8,29 @@
 body{
     margin: 0;
     padding: 0;
-    height: 110vh;
+    min-height: 100vh;
     background-color: var(--whiteGray);
 }
-#content{
-    height: 290vh;
-    width: 100%;
-    background-color: var(--whiteGray) ;
-}
+
 #user-management{
-    height: 100vh;
+    min-height: 90vh;
     display: flex;
-    align-items: center;
     justify-content: space-around;
 }
 .user-management-div{
-    height: 96%;
+    min-height: 96%;
     background-color: white;
     border-radius: 5px;
     width: 100%;
+    margin: 10px 0;
 }
 #show-user-data{
     width: 23%;
     padding-top: 30px;
+    position: absolute;
 }
 #show-users-list{
-    width: 75%;
+    width: 96%;
 }
 
 #search-user{
@@ -50,7 +47,7 @@ body{
     font-family: var(--baseFont);
     font-size: 16px;
 }
-#search-btn{
+/* #search-btn{
     height: 40px;
     border: none;
     font-family: var(--baseFont) !important;
@@ -61,12 +58,13 @@ body{
     transition: 0.2s ease-in-out;
     border-radius: 5px;
     margin-bottom: 10px;
+    margin-bottom: 40px;
 }
 
 #search-btn:active{
     transform: scale(0.9);
-}
-.search-container select{
+} */
+/* .search-container select{
     height: 40px;
     width: 100%;
     background-color: var(--whiteGray);
@@ -76,12 +74,12 @@ body{
     border: none;
     margin-bottom: 10px;
     padding-left: 12px;
-}
-#input-filter{
+} */
+/* #input-filter{
     width: 86%;
     margin: 0 auto;
     height: auto;
-}
+} */
 #reset-data-list{
     height: 40px;
     border: none;
@@ -103,7 +101,7 @@ body{
     margin-bottom: 30px;
     color: var(--fontGray);
 }
-#search-filter{
+/* #search-filter{
     height: 40px;
     width: 100%;
     border: none;
@@ -116,12 +114,13 @@ body{
     font-family: var(--baseFont);
     color: var(--fontGray);
     margin-right: 7px !important;
-}
+} */
 #database-handle{
     display: flex;
     align-items: center;
     padding-left: 20px;
     padding-right: 20px;
+    height: 70px;
 }
 #show-users-list button{
     margin: 20px;
@@ -166,3 +165,4 @@ body{
 .st-data td{
     color: var(--fontGray);
 }
+/*  */
