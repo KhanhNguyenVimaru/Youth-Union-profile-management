@@ -12,12 +12,24 @@
                     </div>
                     <input type="text" id="new_users_id" placeholder="Nhập mã sinh viên">
                     <input type="text" id="new_users_name" placeholder="Nhập tên đoàn viên">
+                    <div class="label-insert-modal">
+                        <label for="get-birthdate" id="get-birthdate-label" style="margin: 0;">Nhập ngày sinh</label>
+                    </div>
                     <input type="date" name="get-birthdate" id="get-birthdate">
                     <select name="gender" id="gender">
                         <option value="none" class="gender-selection">Giới tính</option>
                         <option value="nam" class="gender-selection">Nam</option>
                         <option value="nu" class="gender-selection">Nữ</option>
                     </select>
+
+                    <select name="get-depart" id="get-depart">
+                        <option value="none">Khoa</option>
+                        <option value="1">Khoa Công nghệ thông tin</option>
+                        <option value="2">Khoa Hàng hải</option>
+                        <option value="3">Khoa Kinh tế</option>
+                        <option value="4">Khoa Quản trị - Tài chính</option>
+                    </select>
+
                     <select name="get-class-list" id="get-class-list">
                         <option value="0">Chọn lớp</option>
 
@@ -46,13 +58,13 @@
                         </optgroup>
                     </select>
 
-
-                    <select name="get-depart" id="get-depart">
-                        <option value="none">Khoa</option>
-                        <option value="1">Khoa Công nghệ thông tin</option>
-                        <option value="2">Khoa Hàng hải</option>
-                        <option value="3">Khoa Kinh tế</option>
-                        <option value="4">Khoa Quản trị - Tài chính</option>
+                    <select name="get-year-in" id="get-year-in">
+                        <option value="none">Niên khóa</option>
+                        <option value="61">61</option>
+                        <option value="62">62</option>
+                        <option value="63">63</option>
+                        <option value="64">64</option>
+                        <option value="65">65</option>
                     </select>
 
                     <select class="selectpicker" data-live-search="true" name="get-role" id="get-role">

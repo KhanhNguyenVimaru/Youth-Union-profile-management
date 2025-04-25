@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-$required_fields = ['ten', 'id', 'password', 'email', 'phone', 'gender', 'birthdate', 'userClass', 'department', 'role'];
+$required_fields = ['ten', 'id', 'password', 'email', 'phone', 'gender', 'birthdate', 'userClass', 'department', 'role', 'yearin'];
 foreach ($required_fields as $field) {
     if (!isset($data[$field]) || empty(trim($data[$field]))) {
         echo json_encode(["success" => false, "message" => "Thiếu dữ liệu trường: $field"]);
@@ -33,6 +33,7 @@ $userClass = $data['userClass'];
 $department = $data['department'];
 $chidoan = $department[0]; 
 $role = $data['role']; 
+$yearin = $data['yearin'];
 
 $hash_pass = password_hash($pass, PASSWORD_DEFAULT);
 
@@ -43,9 +44,9 @@ if (available($conn, $id)) {
 
 $username = account_name($name, $id);
 
-$stmt = $conn->prepare("INSERT INTO doanvien (id, ho_ten, gioi_tinh, ngay_sinh, lop_id, chidoan_id, khoa, email, sdt, chuc_vu)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("isssiissss", $id, $name, $gender, $birth, $userClass, $chidoan, $department, $email, $phone, $role);
+$stmt = $conn->prepare("INSERT INTO doanvien (id, ho_ten, gioi_tinh, ngay_sinh, lop_id, chidoan_id, khoa, email, sdt, chuc_vu, nienkhoa)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("isssiissssi", $id, $name, $gender, $birth, $userClass, $chidoan, $department, $email, $phone, $role, $yearin);
 
 if ($stmt->execute()) {
     echo json_encode(["success" => true, "message" => "Thêm tài khoản thành công"]);

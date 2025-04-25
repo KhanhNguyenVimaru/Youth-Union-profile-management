@@ -36,3 +36,11 @@
 .modal-body{
     height: 120%;
 }
+#get-birthdate-label,
+.label-insert-modal{
+    width: 86%;
+    display: flex;
+    margin-left: 20px;
+    color: var(--fontGray);
+    font-family: var(--baseFont);
+}

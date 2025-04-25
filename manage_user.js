@@ -15,8 +15,10 @@ document.getElementById("insert-user-btn").addEventListener("click", function ()
     let department = document.getElementById("get-depart").value;
     let role = document.getElementById("get-role").value;
     let birthdate = document.getElementById("get-birthdate").value;
+    let yearin = document.getElementById("get-year-in").value;
+    console.log(yearin);
 
-    if (!id || !ten || !email || !phone || gender === "none" || userClass === "0" || department === "none" || role === "none" || birthdate === "") {
+    if (!id || !ten || !email || !phone || gender === "none" || userClass === "0" || department === "none" || role === "none" || birthdate === "" ||yearin === "none") {
         alert("Vui lòng điền đầy đủ tất cả các trường!");
         return;
     }
@@ -48,8 +50,8 @@ document.getElementById("insert-user-btn").addEventListener("click", function ()
         userClass: userClass,
         department: department,
         role: role,
-        birthdate : birthdate
-        
+        birthdate : birthdate,  
+        yearin : yearin
     };
     console.log(user);
 
@@ -85,6 +87,7 @@ async function insertUser(user) {
 
         if (!response.ok) {
             alert("Dữ liệu gửi đi lỗi");
+            window.location.reload();
             return;
         }
 
@@ -92,10 +95,13 @@ async function insertUser(user) {
 
         if (!data.success) {
             alert("Lỗi ở check success: " + data.message);
+            window.location.reload();
         } else {
             alert(data.message);
+            window.location.reload();
         }
     } catch (error) {
         console.error('Có lỗi xảy ra:', error);
+        window.location.reload();
     }
 }

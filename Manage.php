@@ -23,7 +23,8 @@
             <h5>QUẢN LÝ ĐOÀN VIÊN</h5>
 
             <div class="search-container" style="display: flex; flex-direction:column;" id="input-filter">
-                <input type="text" name="search" id="search-user" placeholder="Nhập thông tin">
+                <input type="text" name="search" id="search-user" placeholder="Nhập thông tin" style="background-color: white;">
+                <label for="class-list" id = "label-div">Bộ lọc tìm kiếm</label>
                 <select name="class-list" id="class-list">
                     <option value="none">Chọn lớp</option>
                     <optgroup label="Khoa Công nghệ thông tin">
@@ -99,6 +100,21 @@
                     </button>
                 </div>
             </div>
+            <div id="users-data-container">
+                <table class="table table-hover" id="users-data-board">
+                    <thead>
+                        <tr class = "table-col">
+                            <th scope="col">MSV</th>
+                            <th scope="col">Họ tên</th>
+                            <th scope="col">Lớp</th>
+                            <th scope="col">Chi đoàn</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                <tbody id = "show-data-here">
+                        <?php include "select_users.php" ?>
+                </tbody>
+            </div>
         </div>
     </div>
 </body>
@@ -106,5 +122,33 @@
 <script src="index.js"></script>
 <script src="call_modal.js"></script>
 <script src="manage_user.js"></script>
+<script>
+    document.getElementById('get-depart').addEventListener('change', function() {
+        const selectedKhoa = this.value;
+        const classSelect = document.getElementById('get-class-list');
+        const optgroups = classSelect.querySelectorAll('optgroup');
+
+        if (selectedKhoa === "none") {
+            optgroups.forEach(group => group.style.display = 'block');
+        } else {
+            const khoaMap = {
+                "1": "Khoa Công nghệ thông tin",
+                "2": "Khoa Hàng hải",
+                "3": "Khoa Kinh tế",
+                "4": "Khoa Quản trị - Tài chính"
+            };
+
+            optgroups.forEach(group => {
+                if (group.label === khoaMap[selectedKhoa]) {
+                    group.style.display = 'block';
+                } else {
+                    group.style.display = 'none';
+                }
+            });
+
+            classSelect.selectedIndex = 0;
+        }
+    });
+</script>
 
 </html>

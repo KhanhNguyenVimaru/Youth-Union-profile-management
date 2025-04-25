@@ -23,26 +23,25 @@ body{
     justify-content: space-around;
 }
 .user-management-div{
-    height: 94%;
+    height: 96%;
     background-color: white;
     border-radius: 5px;
     width: 100%;
 }
 #show-user-data{
-    width: 26%;
+    width: 23%;
     padding-top: 30px;
 }
 #show-users-list{
-    width: 70%;
+    width: 75%;
 }
 
 #search-user{
     width: 100%;
     height: 40px;
     padding: 7px;
-    background-color: var(--whiteGray);
-    border: none;
-    padding-left: 20px;
+    border: 0.8px solid var(--backGroundGray) !important;
+    padding-left: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
 }
@@ -140,13 +139,30 @@ body{
     font-family: var(--baseFont);
     margin-top: 10px;
 }
-.label-insert-modal{
-    width: 86%;
-    display: flex;
-    margin-left: 20px;
+#send-user-data{
+    margin-left: auto;
+}
+.table-col th{
+    font-weight: bold;
+    color: #6a6a6a;
+}
+#users-data-board{
+    max-width: 96%;
+    margin: 0 auto;
+    font-size: 15px;
+}
+#label-div{
+    margin: 20px;
+    margin-top: 30px;
+    margin-left: 0;
     color: var(--fontGray);
     font-family: var(--baseFont);
 }
-#send-user-data{
-    margin-left: auto;
+.st-data{
+    font-family: var(--baseFont);
+    color: var(--fontGray);
+}
+.st-data th,
+.st-data td{
+    color: var(--fontGray);
 }
