@@ -51,18 +51,13 @@
                         </tr>
                     </thead>
                     <tbody id="show-data-here">
-                        <?php include "select_users.php"; ?>
+                        <!-- Kết quả sẽ được chèn vào đây bởi AJAX -->
                     </tbody>
                 </table>
                 <div style="align-self: end">
                     <nav aria-label="Page navigation" id="page-div">
                         <ul class="pagination" style="margin: 0;">
-                            <?php
-                            for ($i = 1; $i <= $total_pages; $i++) {
-                                $active = ($i == $page) ? 'active' : '';
-                                echo '<li class="page-item ' . $active . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-                            }
-                            ?>
+                            <!-- Phân trang sẽ được chèn vào đây bởi AJAX -->
                         </ul>
                     </nav>
                 </div>
@@ -72,7 +67,6 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 <script src="index.js"></script>
-<script src="call_modal.js"></script>
 <script src="manage_user.js"></script>
 <script>
     document.getElementById('get-depart').addEventListener('change', function() {
@@ -110,8 +104,30 @@
     });
 </script>
 <script>
-    function resetPage(){
+    function resetPage() {
         window.location.reload();
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const signUp = document.getElementById("SignUp");
+        const filter = document.getElementById("filter");
+
+        if (signUp) {
+            signUpModal = new bootstrap.Modal(signUp);
+        }
+        if (filter) {
+            filterModal = new bootstrap.Modal(filter);
+        }
+
+    });
+
+    function loadSignUpModal() {
+        if (signUpModal) signUpModal.show();
+    }
+
+    function loadFilter() {
+        if (filterModal) filterModal.show();
     }
 </script>
 

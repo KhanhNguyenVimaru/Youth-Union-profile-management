@@ -13,7 +13,7 @@
                 <!-- start here -->
                 <div class="form">
                     <div class="label-insert-modal">
-                        <label for="new_users_id">Nhập thông tin Đoàn viên</label>
+                        <label for="new_users_id">Nhập thông tin cá nhân</label>
                     </div>
                     <input type="text" id="new_users_id" placeholder="Nhập mã sinh viên">
                     <input type="text" id="new_users_name" placeholder="Nhập tên đoàn viên">
@@ -187,13 +187,13 @@
                                 <option value="none">Sắp xếp theo</option>
                                 <option value="sort_id">Mã sinh viên</option>
                                 <option value="sort_name">Họ tên</option>
-                                <option value="">Lớp</option>
-                                <option value="">Liên chi doàn</option>
+                                <option value="sort_class">Lớp</option>
+                                <option value="sort_uni">Liên chi doàn</option>
                             </select>
                             <select name="get-sort-side" id="get-sort-side">
                                 <option value="none">Sắp xếp chiều</option>
-                                <option value="increase">Tăng</option>
-                                <option value="decrease">Giảm</option>
+                                <option value="ASC">Tăng</option>
+                                <option value="DESC">Giảm</option>
                             </select>
                             <button type="button" class="btn btn-primary" id="filter-btn">Tìm kiếm</button>
 
@@ -203,6 +203,31 @@
 
 
                     <hr style="width: 96%; margin: 10px auto; margin-top:20px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="modal fade manage_modal modal-lg" id="detail-data" tabindex="-1" aria-labelledby="detailDataModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detail-data-label">Thông tin Đoàn viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body-detail-data ">
+        
+                        
                 </div>
             </div>
         </div>

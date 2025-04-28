@@ -165,4 +165,6 @@ body{
 .st-data td{
     color: var(--fontGray);
 }
-/*  */
+.st-data{
+    cursor: pointer;
+}
