@@ -97,13 +97,6 @@
     });
 </script>
 <script>
-    window.addEventListener('scroll', function() {
-        var div = document.getElementById('floatingDiv');
-        var scrollTop = window.scrollY || window.pageYOffset;
-        div.style.top = (100 + scrollTop) + 'px'; // giữ khoảng cách 100px với đầu trang
-    });
-</script>
-<script>
     function resetPage() {
         window.location.reload();
     }

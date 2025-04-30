@@ -57,13 +57,16 @@ if ($year != 'none') {
     $param_types .= 's';
 }
 if ($branch != 'none') {
-    $sql .= " AND chidoan.ten_chidoan = ?";
+    $sql .= " AND chidoan.id = ?";
     $param_values[] = $branch;
-    $param_types .= 's';
+    $param_types .= 'i';
 }
 
 // Sắp xếp
 if ($sortOn != 'none') {
+    if($sortOn == "id"){
+        $sortOn = "doanvien.id";
+    }
     $sql .= " ORDER BY $sortOn";
     if ($sortSide != 'none') {
         $sql .= " $sortSide";

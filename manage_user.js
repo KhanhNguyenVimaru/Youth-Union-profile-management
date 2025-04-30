@@ -90,14 +90,14 @@ async function insertUser(user) {
         const data = await response.json();
 
         if (!data.success) {
-            alert("Lỗi ở check success: " + data.message);
+            alert("Lỗi: " + data.message);
             window.location.reload();
         } else {
             alert(data.message);
             window.location.reload();
         }
     } catch (error) {
-        console.error('Có lỗi xảy ra:', error);
+        alert("Lỗi: " + error);
         window.location.reload();
     }
 }
@@ -105,7 +105,7 @@ async function insertUser(user) {
 document.getElementById("filter-btn").addEventListener("click", function () {
     loadDataBase();
 });
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
     loadDataBase();
 })
 
@@ -139,7 +139,7 @@ function loadDataBase() {
                 const row = document.createElement("tr");
                 row.classList.add("st-data");
                 row.innerHTML = `
-                <th scope="row">${item.doanvien_id}</th>
+                <th scope="row" class = "show-user-id">${item.doanvien_id}</th>
                 <td>${item.ho_ten}</td>
                 <td>${item.ngay_sinh}</td>
                 <td>${item.ten_lop} - ${item.nienkhoa}</td>
@@ -152,4 +152,50 @@ function loadDataBase() {
         .catch(error => {
             console.error("Có lỗi xảy ra khi tìm kiếm:", error);
         });
+}
+
+document.getElementById("show-data-here").addEventListener("click", function (e) {
+    const clickedRow = e.target.closest(".st-data");
+    if (clickedRow) {
+        const detail = document.getElementById("detail-data");
+        if (detail) {
+            let detailModal = new bootstrap.Modal(detail);
+            detailModal.show();
+            const idCell = clickedRow.querySelector(".show-user-id");
+            const id = idCell ? idCell.textContent.trim() : "Không có ID";
+            console.log("id: " + id);
+            getUserData(id);
+        }
+    }
+});
+
+function getUserData(id) {
+    const userId = { id: id }; // hoặc viết gọn là { id }
+
+    fetch("get_user_data.php", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userId)
+    })
+    .then(response => response.json()) // cần có dấu () sau json
+    .then(response => {
+        if (response.success) {
+            const user = response.data;
+            document.getElementById("show-user-id").value = user.doanvien_id;
+            document.getElementById("show-user-name").value = user.ho_ten;
+            document.getElementById("show-user-gender").value = user.gioi_tinh.toLowerCase() === "nữ" ? "nu" : "nam";
+            document.getElementById("show-user-birthdate").value = user.ngay_sinh;
+            document.getElementById("show-user-depart").value = user.khoa;
+            document.getElementById("show-user-email").value = user.email;
+            document.getElementById("show-user-tel").value = user.sdt;
+            document.getElementById("show-user-role").value = user.chuc_vu;
+            document.getElementById("show-user-year-in").value = user.nienkhoa;
+            document.getElementById("get-user-class-list").value = user.lop_id;
+        } else {
+            console.error("Lỗi dữ liệu:", response);
+        }
+    })
+    .catch(error => {
+        console.error("Lỗi fetch:", error);
+    });
 }
