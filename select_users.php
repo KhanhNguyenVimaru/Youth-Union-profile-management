@@ -26,6 +26,7 @@ $sql = "SELECT
             doanvien.id AS doanvien_id,
             doanvien.ho_ten,
             doanvien.nienkhoa,
+            doanvien.sdt,
             doanvien.email,
             chidoan.ten_chidoan,
             doanvien.ngay_sinh,

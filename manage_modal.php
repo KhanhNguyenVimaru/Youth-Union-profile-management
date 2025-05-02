@@ -1,3 +1,21 @@
+<div class="modal fade manage_modal" id="Login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="LoginModal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content p-4">
+            <div class="modal-header">
+                <h5 class="modal-title">ĐĂNG NHẬP</h5>
+            </div>
+            <div style="display: flex;flex-direction:column; align-items:center">
+                <input type="text" class="form-control mb-2" name="login-get-mail" id="login-get-id" placeholder="Nhập mã sinh viên" style="margin-top: 20px;">
+                <input type="password" class="form-control mb-3" name="login-get-pass" id="login-get-pass" placeholder="Nhập mật khẩu">
+                <p style="font-family: 'bahnschrift'; color:#6a6a6a">Quên mật khẩu, lấy lại <a href="">tại đây</a></p>
+                <button class="btn btn-primary" onclick="handleLogin()" style="width:80%">Đăng nhập</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="modal fade manage_modal" id="SignUp" tabindex="-1" aria-labelledby="signUpModalLabel">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -226,121 +244,140 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="modal-body-detail-data">
+                <div id="detail-first-wrapper">
+                    <!-- start here -->
+                    <div class="form">
+                        <div class="label-detail-modal">
+                            <label for="show-user-id">Mã sinh viên</label>
+                        </div>
+                        <input type="text" id="show-user-id" placeholder="Nhập mã sinh viên">
+                        <div class="label-detail-modal">
+                            <label for="show-user-name">Họ và tên: </label>
+                        </div>
+                        <input type="text" id="show-user-name" placeholder="Nhập tên đoàn viên">
+                        <div class="label-insert-modal">
+                            <label for="show-user-birthdate" id="get-birthdate-label" style="margin: 0;">Ngày sinh</label>
+                        </div>
+                        <input type="date" name="show-user-birthdate" id="show-user-birthdate">
+                        <div class="label-detail-modal">
+                            <label for="show-user-gender">Giới tính: </label>
+                        </div>
+                        <select name="show-user-gender" id="show-user-gender">
+                            <option value="none" class="gender-selection">Giới tính</option>
+                            <option value="nam" class="gender-selection">Nam</option>
+                            <option value="nu" class="gender-selection">Nữ</option>
+                        </select>
+                    </div>
+                    <!--  end -->
 
 
-                <!-- start here -->
-                <div class="form">
-                    <div class="label-detail-modal">
-                        <label for="show-user-id">Mã sinh viên</label>
+
+
+                    <!-- start here -->
+                    <div class="form">
+                        <div class="label-detail-modal">
+                            <label for="show-user-depart">Khoa:</label>
+                        </div>
+                        <select name="show-user-depart" id="show-user-depart">
+                            <option value="none">Khoa</option>
+                            <option value="1">Khoa Công nghệ thông tin</option>
+                            <option value="2">Khoa Hàng hải</option>
+                            <option value="3">Khoa Kinh tế</option>
+                            <option value="4">Khoa Quản trị - Tài chính</option>
+                        </select>
+                        <div class="label-detail-modal">
+                            <label for="get-user-class-list">Lớp:</label>
+                        </div>
+                        <select name="get-user-class-list" id="get-user-class-list">
+                            <option value="0">Chọn lớp</option>
+
+                            <optgroup label="Khoa Công nghệ thông tin">
+                                <option value="101">CNT</option>
+                                <option value="102">KPM</option>
+                                <option value="103">TTM</option>
+                            </optgroup>
+
+                            <optgroup label="Khoa Hàng hải">
+                                <option value="201">HH</option>
+                            </optgroup>
+
+                            <optgroup label="Khoa Kinh tế">
+                                <option value="301">KTB</option>
+                                <option value="302">KTN</option>
+                                <option value="303">KTL</option>
+                                <option value="304">KTC</option>
+                                <option value="305">KTH</option>
+                            </optgroup>
+
+                            <optgroup label="Khoa Quản trị - Tài chính">
+                                <option value="401">QKT</option>
+                                <option value="402">QKD</option>
+                                <option value="403">QTC</option>
+                            </optgroup>
+                        </select>
+                        <div class="label-detail-modal">
+                            <label for="show-user-year-in">Niên khóa:</label>
+                        </div>
+                        <select name="show-user-year-in" id="show-user-year-in">
+                            <option value="none">Niên khóa</option>
+                            <option value="61">61</option>
+                            <option value="62">62</option>
+                            <option value="63">63</option>
+                            <option value="64">64</option>
+                            <option value="65">65</option>
+                        </select>
+                        <div class="label-detail-modal">
+                            <label for="show-user-role">Vai trò:</label>
+                        </div>
+                        <select class="selectpicker" data-live-search="true" name="show-user-role" id="show-user-role">
+                            <option value="none">Chức vụ</option>
+                            <option value="admin">Admin</option>
+                            <option value="doanvien">Đoàn viên</option>
+                            <option value="canbodoan">Cán bộ Đoàn</option>
+                        </select>
                     </div>
-                    <input type="text" id="show-user-id" placeholder="Nhập mã sinh viên">
-                    <div class="label-detail-modal">
-                        <label for="show-user-name">Họ và tên: </label>
+                    <!-- end -->
+
+
+
+                    <!-- start here -->
+                    <div class="form">
+                        <div class="label-detail-modal">
+                            <label for="show-user-email">Email tài khoản:</label>
+                        </div>
+                        <input type="email" name="show-user-email" id="show-user-email" placeholder="Email: ">
+                        <div class="label-detail-modal">
+                            <label for="show-user-tel">Số điện thoại:</label>
+                        </div>
+                        <input type="tel" name="show-user-tel" id="show-user-tel" placeholder="Nhập số điện thoại">
+                        <hr style="width:80%">
+                        <button type="button" class="btn btn-outline-danger" style="height:40px; width:80%">Xóa tài khoản</button>
                     </div>
-                    <input type="text" id="show-user-name" placeholder="Nhập tên đoàn viên">
-                    <div class="label-insert-modal">
-                        <label for="show-user-birthdate" id="get-birthdate-label" style="margin: 0;">Ngày sinh</label>
-                    </div>
-                    <input type="date" name="show-user-birthdate" id="show-user-birthdate">
-                    <div class="label-detail-modal">
-                        <label for="show-user-gender">Giới tính: </label>
-                    </div>
-                    <select name="show-user-gender" id="show-user-gender">
-                        <option value="none" class="gender-selection">Giới tính</option>
-                        <option value="nam" class="gender-selection">Nam</option>
-                        <option value="nu" class="gender-selection">Nữ</option>
-                    </select>
+                    <!-- end here -->
                 </div>
-                <!--  end -->
-
-
-
-
-                <!-- start here -->
-                <div class="form">
-                    <div class="label-detail-modal">
-                        <label for="show-user-depart">Khoa:</label>
+                <!-- first wapper here -->
+                <hr style="width:100%">
+                <h5>Hồ sơ Đoàn Viên</h5>
+                <div id="detail-second-wrapper">
+                    <div class="form">
+                        <div class="label-detail-modal">
+                            <label for="show-day-join">Ngày vào Đoàn:</label>
+                        </div>
+                        <input type="date" name="show-day-join" id="show-day-join">
                     </div>
-                    <select name="show-user-depart" id="show-user-depart">
-                        <option value="none">Khoa</option>
-                        <option value="1">Khoa Công nghệ thông tin</option>
-                        <option value="2">Khoa Hàng hải</option>
-                        <option value="3">Khoa Kinh tế</option>
-                        <option value="4">Khoa Quản trị - Tài chính</option>
-                    </select>
-                    <div class="label-detail-modal">
-                        <label for="get-user-class-list">Lớp:</label>
+                    <div class="form">
+                        <div class="label-detail-modal">
+                            <label for="show-location-join">Nơi kết nạp:</label>
+                        </div>
+                        <input type="text" name="show-location-join" id="show-location-join">
                     </div>
-                    <select name="get-user-class-list" id="get-user-class-list">
-                        <option value="0">Chọn lớp</option>
-
-                        <optgroup label="Khoa Công nghệ thông tin">
-                            <option value="101">CNT</option>
-                            <option value="102">KPM</option>
-                            <option value="103">TTM</option>
-                        </optgroup>
-
-                        <optgroup label="Khoa Hàng hải">
-                            <option value="201">HH</option>
-                        </optgroup>
-
-                        <optgroup label="Khoa Kinh tế">
-                            <option value="301">KTB</option>
-                            <option value="302">KTN</option>
-                            <option value="303">KTL</option>
-                            <option value="304">KTC</option>
-                            <option value="305">KTH</option>
-                        </optgroup>
-
-                        <optgroup label="Khoa Quản trị - Tài chính">
-                            <option value="401">QKT</option>
-                            <option value="402">QKD</option>
-                            <option value="403">QTC</option>
-                        </optgroup>
-                    </select>
-                    <div class="label-detail-modal">
-                        <label for="show-user-year-in">Niên khóa:</label>
+                    <div class="form">
+                        <div class="label-detail-modal">
+                            <label for="profile-file">Ảnh hồ sơ:</label>
+                        </div>
+                        <input id="profile-file" class="form-control" type="file" id="file_scan" name="file_scan" accept=".pdf,.jpg,.png" style="border: none;">
                     </div>
-                    <select name="show-user-year-in" id="show-user-year-in">
-                        <option value="none">Niên khóa</option>
-                        <option value="61">61</option>
-                        <option value="62">62</option>
-                        <option value="63">63</option>
-                        <option value="64">64</option>
-                        <option value="65">65</option>
-                    </select>
-                    <div class="label-detail-modal">
-                        <label for="show-user-role">Vai trò:</label>
-                    </div>
-                    <select class="selectpicker" data-live-search="true" name="show-user-role" id="show-user-role">
-                        <option value="none">Chức vụ</option>
-                        <option value="admin">Admin</option>
-                        <option value="doanvien">Đoàn viên</option>
-                        <option value="canbodoan">Cán bộ Đoàn</option>
-                    </select>
                 </div>
-                <!-- end -->
-
-
-
-                <!-- start here -->
-                <div class="form">
-                    <div class="label-detail-modal">
-                        <label for="show-user-email">Email tài khoản:</label>
-                    </div>
-                    <input type="email" name="show-user-email" id="show-user-email" placeholder="Email: ">
-                    <div class="label-detail-modal">
-                        <label for="show-user-tel">Số điện thoại:</label>
-                    </div>
-                    <input type="tel" name="show-user-tel" id="show-user-tel" placeholder="Nhập số điện thoại">
-                    <!-- <hr style="width:80%">
-                    <div class="label-insert-modal">
-                        <label for="new_users_password">Tạo mật khẩu</label>
-                    </div>
-                    <input type="password" name="show-user-password" id="show-user-password" placeholder="Nhập mật khẩu"> -->
-                </div>
-                <!-- end here -->
-
             </div>
         </div>
     </div>

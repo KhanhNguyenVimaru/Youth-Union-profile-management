@@ -47,6 +47,7 @@
                             <th scope="col">Ngày sinh</th>
                             <th scope="col">Lớp</th>
                             <th scope="col">Chi đoàn</th>
+                            <th scope="col">Số điện thoại</th>
                             <th scope="col">Email</th>
                         </tr>
                     </thead>
@@ -54,13 +55,6 @@
                         <!-- Kết quả sẽ được chèn vào đây bởi AJAX -->
                     </tbody>
                 </table>
-                <div style="align-self: end">
-                    <nav aria-label="Page navigation" id="page-div">
-                        <ul class="pagination" style="margin: 0;">
-                            <!-- Phân trang sẽ được chèn vào đây bởi AJAX -->
-                        </ul>
-                    </nav>
-                </div>
             </div>
         </div>
     </div>

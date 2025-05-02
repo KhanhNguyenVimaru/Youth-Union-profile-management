@@ -144,6 +144,7 @@ function loadDataBase() {
                 <td>${item.ngay_sinh}</td>
                 <td>${item.ten_lop} - ${item.nienkhoa}</td>
                 <td>${item.ten_chidoan}</td>
+                <td>${item.sdt}</td>
                 <td>${item.email}</td>
             `;
                 resultContainer.appendChild(row);
@@ -162,8 +163,7 @@ document.getElementById("show-data-here").addEventListener("click", function (e)
             let detailModal = new bootstrap.Modal(detail);
             detailModal.show();
             const idCell = clickedRow.querySelector(".show-user-id");
-            const id = idCell ? idCell.textContent.trim() : "Không có ID";
-            console.log("id: " + id);
+            const id = idCell ? idCell.textContent.trim() : "NULL";
             getUserData(id);
         }
     }
@@ -199,3 +199,6 @@ function getUserData(id) {
         console.error("Lỗi fetch:", error);
     });
 }
+
+
+

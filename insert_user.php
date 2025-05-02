@@ -44,9 +44,9 @@ if (available($conn, $id)) {
 
 $username = account_name($name, $id);
 
-$stmt = $conn->prepare("INSERT INTO doanvien (id, ho_ten, gioi_tinh, ngay_sinh, lop_id, chidoan_id, khoa, email, sdt, chuc_vu, nienkhoa)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("isssiissssi", $id, $name, $gender, $birth, $userClass, $chidoan, $department, $email, $phone, $role, $yearin);
+$stmt = $conn->prepare("INSERT INTO doanvien (id, ho_ten, gioi_tinh, ngay_sinh, lop_id, chidoan_id, khoa, email, sdt, chuc_vu, nienkhoa, password)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("isssiissssis", $id, $name, $gender, $birth, $userClass, $chidoan, $department, $email, $phone, $role, $yearin, $hash_pass);
 
 if ($stmt->execute()) {
     echo json_encode(["success" => true, "message" => "Thêm tài khoản thành công"]);

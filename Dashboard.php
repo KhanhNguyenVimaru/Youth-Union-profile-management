@@ -136,7 +136,7 @@
             <h5 style="margin-top: 40px;">Chức năng</h5>
             <hr style="width: 80%">
             <ul>
-                <li><a href="">Quản lý hồ sơ Đoàn viên</a></li>
+                <li><a onclick="loadPage('Manage.php')">Quản lý hồ sơ Đoàn viên</a></li>
                 <li><a href="">Thông báo tin tức</a></li>
                 <li><a href="">Hoạt động Đoàn</a></li>
             </ul>
@@ -164,5 +164,11 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 <script src="index.js"></script>
+<script>
+    function reset_account_test(){
+    localStorage.clear();
+    console.log("Đã xóa")
+}   
+</script>
 
 </html>
