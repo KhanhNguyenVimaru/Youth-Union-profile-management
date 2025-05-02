@@ -55,6 +55,22 @@
                         <!-- Kết quả sẽ được chèn vào đây bởi AJAX -->
                     </tbody>
                 </table>
+                <div class="pagination-container" style="display: flex; justify-content: center; margin-top: 20px;">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination" id="pagination-controls">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous" id="prev-page">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next" id="next-page">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
@@ -62,34 +78,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 <script src="index.js"></script>
 <script src="manage_user.js"></script>
-<script>
-    document.getElementById('get-depart').addEventListener('change', function() {
-        const selectedKhoa = this.value;
-        const classSelect = document.getElementById('get-class-list');
-        const optgroups = classSelect.querySelectorAll('optgroup');
-
-        if (selectedKhoa === "none") {
-            optgroups.forEach(group => group.style.display = 'block');
-        } else {
-            const khoaMap = {
-                "1": "Khoa Công nghệ thông tin",
-                "2": "Khoa Hàng hải",
-                "3": "Khoa Kinh tế",
-                "4": "Khoa Quản trị - Tài chính"
-            };
-
-            optgroups.forEach(group => {
-                if (group.label === khoaMap[selectedKhoa]) {
-                    group.style.display = 'block';
-                } else {
-                    group.style.display = 'none';
-                }
-            });
-
-            classSelect.selectedIndex = 0;
-        }
-    });
-</script>
 <script>
     function resetPage() {
         window.location.reload();

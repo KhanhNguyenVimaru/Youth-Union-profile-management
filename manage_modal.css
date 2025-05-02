@@ -137,3 +137,89 @@
 .inputfile + label:hover {
     background-color: red;
 }
+
+/* Custom File Input Styles */
+.file-input-container {
+    position: relative;
+    margin: 20px 0;
+}
+
+.file-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.custom-file-input {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-file-input input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.file-input-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    color: #495057;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.file-input-button:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.file-input-button i {
+    font-size: 16px;
+}
+
+.file-name-display {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    border: 1px dashed #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #495057;
+    display: none;
+}
+
+.file-name-display.show {
+    display: block;
+}
+
+.file-name-display i {
+    margin-right: 8px;
+    color: #28a745;
+}
+
+.file-input-preview {
+    margin-top: 10px;
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 4px;
+    display: none;
+}
+
+.file-input-preview.show {
+    display: block;
+}
