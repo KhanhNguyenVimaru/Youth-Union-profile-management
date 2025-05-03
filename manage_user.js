@@ -58,7 +58,7 @@ function confirmPassWord(passInput, confirmInput) {
     const confirm = confirmInput.value;
 
     if (pass.length < 8) {
-        alert("Password must be at least 8 characters!");
+        alert("Mật khẩu phải có tối thiểu 8 ký tự");
         passInput.value = "";
         confirmInput.value = "";
         return false;
@@ -140,9 +140,19 @@ function loadDataBase() {
     .then(data => {
         allUsers = data.users;
         totalPages = Math.ceil(allUsers.length / rowsPerPage);
-        currentPage = 1; // Reset to first page when new data is loaded
-        displayUsers();
-        updatePaginationControls();
+        currentPage = 1; 
+        if(localStorage.getItem("myID") != null && localStorage.getItem("myRole") === "admin"){
+            displayUsers();
+            updatePaginationControls();
+        }
+        else if(localStorage.getItem("myRole") !== null && localStorage.getItem("myRole") !== "admin"){
+            window.location.href = "Dashboard.php";
+            alert("Truy cập bị từ chối. Vui lòng liên hệ quản trị viên để được cấp quyền.");
+        }
+        else{
+            window.location.href = "Dashboard.php";
+            alert("Truy cập bị từ chối. Vui lòng liên hệ quản trị viên để được cấp quyền.");
+        }
     })
     .catch(error => {
         console.error("Có lỗi xảy ra khi tìm kiếm:", error);
@@ -250,6 +260,7 @@ function getUserData(id) {
     .then(response => {
         if (response.success) {
             const user = response.data;
+            console.log(user);
             document.getElementById("show-user-id").value = user.doanvien_id;
             document.getElementById("show-user-name").value = user.ho_ten;
             document.getElementById("show-user-gender").value = user.gioi_tinh.toLowerCase() === "nữ" ? "nu" : "nam";
@@ -353,19 +364,6 @@ function deleteUser() {
     }
 }
 
-// Add event listeners for the save and delete buttons
-document.addEventListener('DOMContentLoaded', function() {
-    const saveButton = document.querySelector('#detail-data .modal-footer .btn-primary');
-    const deleteButton = document.querySelector('#detail-data .modal-footer .btn-outline-danger');
-
-    if (saveButton) {
-        saveButton.addEventListener('click', saveDetailChanges);
-    }
-
-    if (deleteButton) {
-        deleteButton.addEventListener('click', deleteUser);
-    }
-});
 
 // Hàm xử lý khi thay đổi khoa cho tất cả các modal
 function handleFacultyChange(event) {

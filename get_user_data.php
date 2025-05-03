@@ -17,19 +17,17 @@ if ($conn->connect_error) {
 $data = json_decode(file_get_contents("php://input"), true);
 $id = isset($data['id']) ? $data['id'] : '';
 
-$sql = "SELECT
-            doanvien.id AS doanvien_id,
-            doanvien.ho_ten,
-            doanvien.gioi_tinh,
-            doanvien.ngay_sinh,
-            doanvien.khoa,
-            doanvien.email,
-            doanvien.sdt,
-            doanvien.chuc_vu,
-            doanvien.nienkhoa,
-            lop.ten_lop,
-            lop.id AS lop_id,
-            chidoan.ten_chidoan
+$sql = "SELECT 
+        doanvien.id AS doanvien_id,
+        doanvien.ho_ten,
+        doanvien.gioi_tinh,
+        doanvien.ngay_sinh,
+        doanvien.khoa,
+        doanvien.email,
+        doanvien.sdt,
+        doanvien.chuc_vu,
+        doanvien.nienkhoa,
+        doanvien.lop_id
         FROM doanvien
         INNER JOIN chidoan ON doanvien.chidoan_id = chidoan.id
         INNER JOIN lop ON doanvien.lop_id = lop.id

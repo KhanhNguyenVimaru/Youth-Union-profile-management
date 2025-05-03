@@ -1,14 +1,14 @@
 <div class="modal fade manage_modal" id="Login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="LoginModal">
     <div class="modal-dialog modal-md">
-        <div class="modal-content p-4">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">ĐĂNG NHẬP</h5>
             </div>
-            <div style="display: flex;flex-direction:column; align-items:center">
+            <div style="display: flex;flex-direction:column; align-items:center; padding-bottom: 20px;">
                 <input type="text" class="form-control mb-2" name="login-get-mail" id="login-get-id" placeholder="Nhập mã sinh viên" style="margin-top: 20px;">
                 <input type="password" class="form-control mb-3" name="login-get-pass" id="login-get-pass" placeholder="Nhập mật khẩu">
                 <p style="font-family: 'bahnschrift'; color:#6a6a6a">Quên mật khẩu, lấy lại <a href="">tại đây</a></p>
-                <button class="btn btn-primary" onclick="handleLogin()" style="width:80%">Đăng nhập</button>
+                <button class="btn btn-primary" onclick="handleLogin()" style="width:80%; margin: bottom 40px;">Đăng nhập</button>
             </div>
         </div>
     </div>
@@ -449,6 +449,38 @@
                                 <option value="404">Tài chính - Ngân hàng</option>
                                 <option value="405">Marketing</option>
                             </optgroup>
+                            <optgroup label="Khoa Cơ khí - Điện">
+                                    <option value="501">Công nghệ kỹ thuật cơ khí</option>
+                                    <option value="502">Công nghệ kỹ thuật điện - điện tử</option>
+                                    <option value="503">Công nghệ kỹ thuật điều khiển và tự động hóa</option>
+                                    <option value="504">Công nghệ kỹ thuật ô tô</option>
+                                </optgroup>
+
+                                <optgroup label="Khoa Công trình">
+                                    <option value="601">Kỹ thuật xây dựng</option>
+                                    <option value="602">Kỹ thuật công trình thủy</option>
+                                    <option value="603">Kỹ thuật cơ sở hạ tầng</option>
+                                    <option value="604">Kỹ thuật môi trường</option>
+                                </optgroup>
+
+                                <optgroup label="Khoa Môi trường">
+                                    <option value="701">Công nghệ kỹ thuật môi trường</option>
+                                    <option value="702">Quản lý tài nguyên và môi trường</option>
+                                    <option value="703">Công nghệ kỹ thuật hóa học</option>
+                                </optgroup>
+
+                                <optgroup label="Khoa Ngoại ngữ">
+                                    <option value="801">Ngôn ngữ Anh</option>
+                                    <option value="802">Ngôn ngữ Trung Quốc</option>
+                                    <option value="803">Ngôn ngữ Nhật</option>
+                                </optgroup>
+
+                                <optgroup label="Viện Đào tạo Sau đại học">
+                                    <option value="901">Thạc sĩ Quản trị kinh doanh</option>
+                                    <option value="902">Thạc sĩ Kỹ thuật tàu thủy</option>
+                                    <option value="903">Thạc sĩ Kỹ thuật cơ khí</option>
+                                    <option value="904">Thạc sĩ Kỹ thuật điện</option>
+                                </optgroup>
                         </select>
 
                         <div class="label-detail-modal">
@@ -534,11 +566,11 @@
 
             </div>
             <div class="modal-footer" style="display: flex; align-items:center; justify-content:end">
-                <button type="button" class="btn btn-outline-danger" style="width: 200px; margin-right: 10px">
+                <button type="button" class="btn btn-outline-danger" style="width: 200px; margin-right: 10px" onclick="saveDetailChanges()">
                     <i class="bi bi-trash"></i>
                     Xóa tài khoản
                 </button>
-                <button type="button" class="btn btn-outline-primary" style="width: 200px; margin-left: 0px">
+                <button type="button" class="btn btn-outline-primary" style="width: 200px; margin-left: 0px" onclick="deleteUser()">
                     <i class="bi bi-save"></i>
                     Lưu thay đổi
                 </button>

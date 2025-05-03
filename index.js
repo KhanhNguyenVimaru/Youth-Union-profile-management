@@ -1,4 +1,4 @@
-let loginModal; // Biến toàn cục để sau này gọi .hide()
+let loginModal; 
 
 document.addEventListener("DOMContentLoaded", function () {
     if (localStorage.getItem("myID") == null) {
@@ -27,14 +27,17 @@ function handleLogin() {
         .then(response => {
             if (!response.error) {
                 console.log("Đăng nhập thành công!");
+                
                 const account_id = response.id;
                 const role = response.role;
 
+                console.log("Your id: "+account_id);
+                console.log("Your role: " + role);
+
                 localStorage.setItem("myID", account_id);
                 localStorage.setItem("myRole", role);
-
-                window.location.reload;
                 loginModal.hide();
+                window.location.reload;
             }
             else{
                 alert("Lỗi: " + response.message);
@@ -47,5 +50,4 @@ function handleLogin() {
 
 function loadPage(page) {
     window.location.href = page;
-    console.log(localStorage);
 }
