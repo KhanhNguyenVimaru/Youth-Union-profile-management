@@ -92,7 +92,7 @@
             </div>
             <div class="col-md-3">
                 <a style="text-decoration: none;">
-                    <div class="option-selection" id="option-personal"><i class="bi bi-person"></i>TÀI KHOẢN</div>
+                    <div class="option-selection" id="option-personal"><i class="bi bi-person" onclick="loadPage('account.php')"></i>TÀI KHOẢN</div>
                 </a>
             </div>
             <div class="col-md-3">

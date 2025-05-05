@@ -1,4 +1,4 @@
-let loginModal; 
+let loginModal;
 
 document.addEventListener("DOMContentLoaded", function () {
     if (localStorage.getItem("myID") == null) {
@@ -27,11 +27,11 @@ function handleLogin() {
         .then(response => {
             if (!response.error) {
                 console.log("Đăng nhập thành công!");
-                
+
                 const account_id = response.id;
                 const role = response.role;
 
-                console.log("Your id: "+account_id);
+                console.log("Your id: " + account_id);
                 console.log("Your role: " + role);
 
                 localStorage.setItem("myID", account_id);
@@ -39,15 +39,34 @@ function handleLogin() {
                 loginModal.hide();
                 window.location.reload;
             }
-            else{
+            else {
                 alert("Lỗi: " + response.message);
             }
         })
-        .catch(error=>{
+        .catch(error => {
             alert(error.message);
         })
 }
 
 function loadPage(page) {
-    window.location.href = page;
+    console.log("loadPage");
+    checkAccountLogin
+    if (localStorage.getItem("myID") == null) {
+        const loginEl = document.getElementById("Login");
+        loginModal = new bootstrap.Modal(loginEl, {
+            backdrop: 'static',
+            keyboard: false
+        });
+        loginModal.show();
+    }
+    else{
+        if (localStorage.getItem("myID") == null) {
+            const loginEl = document.getElementById("Login");
+            loginModal = new bootstrap.Modal(loginEl, {
+                backdrop: 'static',
+                keyboard: false
+            });
+            loginModal.show();
+        }
+    }
 }
