@@ -1,21 +1,3 @@
-<div class="modal fade manage_modal" id="Login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="LoginModal">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">ĐĂNG NHẬP</h5>
-            </div>
-            <div style="display: flex;flex-direction:column; align-items:center; padding-bottom: 20px;">
-                <input type="text" class="form-control mb-2" name="login-get-mail" id="login-get-id" placeholder="Nhập mã sinh viên" style="margin-top: 20px;">
-                <input type="password" class="form-control mb-3" name="login-get-pass" id="login-get-pass" placeholder="Nhập mật khẩu">
-                <p style="font-family: 'bahnschrift'; color:#6a6a6a">Quên mật khẩu, lấy lại <a href="">tại đây</a></p>
-                <button class="btn btn-primary" onclick="handleLogin()" style="width:80%; margin: bottom 40px;">Đăng nhập</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 <div class="modal fade manage_modal" id="SignUp" tabindex="-1" aria-labelledby="signUpModalLabel">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">

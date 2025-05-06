@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// Kiểm tra đăng nhập
+if (!isset($_SESSION["id"]) || !isset($_SESSION["role"])) {
+    header("Location: login.php");
+    exit();
+}
+
 $host = 'localhost';
 $dbname = 'quanlydoanvien';
 $username = 'root';
@@ -11,11 +19,14 @@ try {
     die("Kết nối thất bại: " . $e->getMessage());
 }
 
+$message = '';
+$error = '';
+
 // Xử lý form cập nhật thông tin
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_info'])) {
     $email = $_POST['email'] ?? '';
     $phone = $_POST['phone'] ?? '';
-    $doanvien_id = 2; // Trong thực tế lấy từ session
+    $doanvien_id = $_SESSION["id"];
 
     try {
         $sql = "UPDATE doanvien SET email = :email, sdt = :phone WHERE id = :id";
@@ -36,21 +47,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
     $current_password = $_POST['current_password'] ?? '';
     $new_password = $_POST['new_password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
-    $doanvien_id = 2; // Trong thực tế lấy từ session
+    $doanvien_id = $_SESSION["id"];
 
     if ($new_password !== $confirm_password) {
         $error = "Mật khẩu mới không khớp!";
     } else {
         try {
-            // Trong thực tế cần kiểm tra mật khẩu hiện tại và mã hóa mật khẩu mới
-            $sql = "UPDATE doanvien SET password = :password WHERE id = :id";
+            // Kiểm tra mật khẩu hiện tại
+            $sql = "SELECT password FROM doanvien WHERE id = :id";
             $stmt = $conn->prepare($sql);
-            $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-            $stmt->bindParam(':password', $hashed_password);
             $stmt->bindParam(':id', $doanvien_id);
             $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $message = "Đổi mật khẩu thành công!";
+            if (!password_verify($current_password, $user['password'])) {
+                $error = "Mật khẩu hiện tại không đúng!";
+            } else {
+                // Cập nhật mật khẩu mới
+                $sql = "UPDATE doanvien SET password = :password WHERE id = :id";
+                $stmt = $conn->prepare($sql);
+                $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+                $stmt->bindParam(':password', $hashed_password);
+                $stmt->bindParam(':id', $doanvien_id);
+                $stmt->execute();
+
+                $message = "Đổi mật khẩu thành công!";
+            }
         } catch (PDOException $e) {
             $error = "Lỗi khi đổi mật khẩu: " . $e->getMessage();
         }
@@ -58,15 +80,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
 }
 
 // Lấy thông tin đoàn viên
-$doanvien_id = 2; // Trong thực tế lấy từ session
-$sql = "SELECT dv.ho_ten, dv.email, dv.sdt, l.ten_lop, cd.ten_chidoan 
+$doanvien_id = $_SESSION["id"];
+$sql = "SELECT dv.*, l.ten_lop, cd.ten_chidoan 
         FROM doanvien dv
         JOIN lop l ON dv.lop_id = l.id
         JOIN chidoan cd ON dv.chidoan_id = cd.id
         WHERE dv.id = :id";
 
 $stmt = $conn->prepare($sql);
-$stmt->bindParam(':id', $doanvien_id, PDO::PARAM_INT);
+$stmt->bindParam(':id', $doanvien_id);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -78,9 +100,10 @@ if (!$user) {
 $sql_activity = "SELECT hd.ten_hoat_dong, hd.ngay_to_chuc, tg.diem_rieng 
                 FROM thamgia tg
                 JOIN hoatdong hd ON tg.hoatdong_id = hd.id
-                WHERE tg.doanvien_id = :id";
+                WHERE tg.doanvien_id = :id
+                ORDER BY hd.ngay_to_chuc DESC";
 $stmt_activity = $conn->prepare($sql_activity);
-$stmt_activity->bindParam(':id', $doanvien_id, PDO::PARAM_INT);
+$stmt_activity->bindParam(':id', $doanvien_id);
 $stmt_activity->execute();
 $activities = $stmt_activity->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -295,19 +318,11 @@ $activities = $stmt_activity->fetchAll(PDO::FETCH_ASSOC);
     <?php include "Navbar.php" ?>
     <?php include "manage_modal.php" ?>
     <div class="container-fluid account-container">
-        <!-- <div class="row narrow-row">
-            <div class="col-12">
-                <div class="user-header mb-4" style="margin-top: 40px; margin-bottom:10px">
-                    <h3 class="text-center">
-                        <i class="fas fa-user-circle me-2"></i>
-                        <?php echo htmlspecialchars($user['ho_ten']); ?>
-                    </h3>
-                </div>
-            </div>
-        </div> -->
         <div class="row narrow-row">
             <div class="col-12">
                 <div class="account-content">
+                    <!-- Thêm nút logout ở đầu trang -->
+
                     <!-- Thông tin cá nhân -->
                     <div id="account-info" class="account-section">
                         <form method="POST">
@@ -338,7 +353,7 @@ $activities = $stmt_activity->fetchAll(PDO::FETCH_ASSOC);
                                 <div class="info-row">
                                     <div class="info-label">Số điện thoại:</div>
                                     <div class="info-value">
-                                        <input type="tel" name="phone" class="form-control" value="<?php echo htmlspecialchars($user['sdt'] ?? ''); ?>">
+                                        <input type="tel" name="phone" class="form-control" value="<?php echo htmlspecialchars($user['sdt']); ?>">
                                     </div>
                                 </div>
                                 <div style="display: flex; justify-content:end">
@@ -415,12 +430,26 @@ $activities = $stmt_activity->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     </div>
                 </div>
+                <div class="d-flex justify-content-end mb-4">
+                    <button onclick="logout()" class="btn btn-danger">
+                        <i class="bi bi-box-arrow-right me-2"></i>Đăng xuất
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Thêm hàm logout
+        function logout() {
+            // Xóa localStorage
+            localStorage.clear();
+
+            // Chuyển hướng đến trang logout
+            window.location.href = 'logout.php';
+        }
+
         function showSection(sectionId) {
             // Ẩn tất cả các section
             document.querySelectorAll('.account-section').forEach(section => {

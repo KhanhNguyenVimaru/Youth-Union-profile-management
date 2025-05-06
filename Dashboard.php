@@ -1,3 +1,44 @@
+<?php
+session_start(); // ⚠️ BẮT BUỘC PHẢI CÓ
+
+// Kiểm tra đăng nhập
+if (!isset($_SESSION["id"]) || !isset($_SESSION["role"])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Kết nối database
+require_once 'config.php';
+
+// Lấy thông tin người dùng
+$userId = $_SESSION["id"];
+$userRole = $_SESSION["role"];
+
+$sql = "SELECT 
+        doanvien.id AS doanvien_id,
+        doanvien.ho_ten,
+        doanvien.gioi_tinh,
+        doanvien.ngay_sinh,
+        doanvien.khoa,
+        doanvien.email,
+        doanvien.sdt,
+        doanvien.chuc_vu,
+        doanvien.nienkhoa,
+        chidoan.ten_chidoan,
+        lop.ten_lop
+        FROM doanvien
+        INNER JOIN chidoan ON doanvien.chidoan_id = chidoan.id
+        INNER JOIN lop ON doanvien.lop_id = lop.id
+        WHERE doanvien.id = ?";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $userId);
+$stmt->execute();
+$result = $stmt->get_result();
+$userInfo = $result->fetch_assoc();
+$stmt->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,11 +136,13 @@
                     <div class="option-selection" id="option-personal"><i class="bi bi-person" onclick="loadPage('account.php')"></i>TÀI KHOẢN</div>
                 </a>
             </div>
+            <?php if ($userRole === 'admin'): ?>
             <div class="col-md-3">
                 <a style="text-decoration: none;">
                     <div class="option-selection" id="option-personal"><i class="bi bi-list-check" onclick="loadPage('Manage.php')"></i>QUẢN LÝ</div>
                 </a>
             </div>
+            <?php endif; ?>
             <div class="col-md-3">
                 <a style="text-decoration: none;">
                     <div class="option-selection" id="option-group"><i class="bi bi-list-task"></i>HOẠT ĐỘNG</div>
@@ -164,11 +207,19 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 <script src="index.js"></script>
+
 <script>
-    function reset_account_test(){
-    localStorage.clear();
-    console.log("Đã xóa")
-}   
+    // Gán session PHP vào localStorage
+    localStorage.setItem("myID", "<?php echo htmlspecialchars($_SESSION['id'], ENT_QUOTES); ?>");
+    localStorage.setItem("myRole", "<?php echo htmlspecialchars($_SESSION['role'], ENT_QUOTES); ?>");
+    localStorage.setItem("userInfo", JSON.stringify(<?php echo json_encode($userInfo); ?>));
+
+    // Kiểm tra giá trị trong console
+    console.log({
+        myID: localStorage.getItem("myID"),
+        myRole: localStorage.getItem("myRole"),
+        userInfo: JSON.parse(localStorage.getItem("userInfo"))
+    });
 </script>
 
 </html>
