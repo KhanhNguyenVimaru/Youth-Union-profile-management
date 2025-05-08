@@ -38,15 +38,6 @@
                     </div>
                     <select name="get-depart" id="get-depart">
                         <option value="none">Chọn khoa/viện</option>
-                        <option value="1">Khoa Hàng hải</option>
-                        <option value="2">Khoa Công nghệ thông tin</option>
-                        <option value="3">Khoa Kinh tế</option>
-                        <option value="4">Khoa Quản trị - Tài chính</option>
-                        <option value="5">Khoa Cơ khí - Điện</option>
-                        <option value="6">Khoa Công trình</option>
-                        <option value="7">Khoa Môi trường</option>
-                        <option value="8">Khoa Ngoại ngữ</option>
-                        <option value="9">Viện Đào tạo Sau đại học</option>
                     </select>
 
                     <div class="label-detail-modal">
@@ -54,71 +45,6 @@
                     </div>
                     <select name="get-class-list" id="get-class-list">
                         <option value="0">Chọn lớp</option>
-
-                        <optgroup label="Khoa Hàng hải">
-                            <option value="101">Điều khiển tàu biển</option>
-                            <option value="102">Máy tàu thủy</option>
-                            <option value="103">Vận tải biển</option>
-                            <option value="104">Khai thác máy tàu biển</option>
-                            <option value="105">Khai thác tàu biển</option>
-                        </optgroup>
-
-                        <optgroup label="Khoa Công nghệ thông tin">
-                            <option value="201">Công nghệ thông tin</option>
-                            <option value="202">Kỹ thuật phần mềm</option>
-                            <option value="203">Hệ thống thông tin</option>
-                            <option value="204">Khoa học máy tính</option>
-                            <option value="205">Mạng máy tính và truyền thông dữ liệu</option>
-                        </optgroup>
-
-                        <optgroup label="Khoa Kinh tế">
-                            <option value="301">Kế toán</option>
-                            <option value="302">Kiểm toán</option>
-                            <option value="303">Kinh tế vận tải</option>
-                            <option value="304">Kinh tế ngoại thương</option>
-                            <option value="305">Kinh tế quốc tế</option>
-                        </optgroup>
-
-                        <optgroup label="Khoa Quản trị - Tài chính">
-                            <option value="401">Quản trị kinh doanh</option>
-                            <option value="402">Quản trị khách sạn</option>
-                            <option value="403">Quản trị dịch vụ du lịch và lữ hành</option>
-                            <option value="404">Tài chính - Ngân hàng</option>
-                            <option value="405">Marketing</option>
-                        </optgroup>
-
-                        <optgroup label="Khoa Cơ khí - Điện">
-                            <option value="501">Công nghệ kỹ thuật cơ khí</option>
-                            <option value="502">Công nghệ kỹ thuật điện - điện tử</option>
-                            <option value="503">Công nghệ kỹ thuật điều khiển và tự động hóa</option>
-                            <option value="504">Công nghệ kỹ thuật ô tô</option>
-                        </optgroup>
-
-                        <optgroup label="Khoa Công trình">
-                            <option value="601">Kỹ thuật xây dựng</option>
-                            <option value="602">Kỹ thuật công trình thủy</option>
-                            <option value="603">Kỹ thuật cơ sở hạ tầng</option>
-                            <option value="604">Kỹ thuật môi trường</option>
-                        </optgroup>
-
-                        <optgroup label="Khoa Môi trường">
-                            <option value="701">Công nghệ kỹ thuật môi trường</option>
-                            <option value="702">Quản lý tài nguyên và môi trường</option>
-                            <option value="703">Công nghệ kỹ thuật hóa học</option>
-                        </optgroup>
-
-                        <optgroup label="Khoa Ngoại ngữ">
-                            <option value="801">Ngôn ngữ Anh</option>
-                            <option value="802">Ngôn ngữ Trung Quốc</option>
-                            <option value="803">Ngôn ngữ Nhật</option>
-                        </optgroup>
-
-                        <optgroup label="Viện Đào tạo Sau đại học">
-                            <option value="901">Thạc sĩ Quản trị kinh doanh</option>
-                            <option value="902">Thạc sĩ Kỹ thuật tàu thủy</option>
-                            <option value="903">Thạc sĩ Kỹ thuật cơ khí</option>
-                            <option value="904">Thạc sĩ Kỹ thuật điện</option>
-                        </optgroup>
                     </select>
 
                     <div class="label-detail-modal">
@@ -126,13 +52,6 @@
                     </div>
                     <select name="get-year-in" id="get-year-in">
                         <option value="none">Niên khóa</option>
-                        <option value="61">61</option>
-                        <option value="62">62</option>
-                        <option value="63">63</option>
-                        <option value="64">64</option>
-                        <option value="65">65</option>
-                        <option value="66">66</option>
-                        <option value="67">67</option>
                     </select>
 
                     <div class="label-detail-modal">
@@ -140,12 +59,6 @@
                     </div>
                     <select name="get-role" id="get-role">
                         <option value="none">Chức vụ</option>
-                        <option value="admin">Quản trị viên</option>
-                        <option value="doanvien">Đoàn viên</option>
-                        <option value="canbodoan">Cán bộ Đoàn</option>
-                        <option value="bithu">Bí thư</option>
-                        <option value="phobithu">Phó Bí thư</option>
-                        <option value="uyvien">Ủy viên Ban Chấp hành</option>
                     </select>
                 </div>
 
@@ -205,83 +118,10 @@
                         <div class="div-filter-container">
                             <select name="uni-branch" id="uni-branch">
                                 <option value="none">Chọn khoa/viện</option>
-                                <option value="1">Khoa Hàng hải</option>
-                                <option value="2">Khoa Công nghệ thông tin</option>
-                                <option value="3">Khoa Kinh tế</option>
-                                <option value="4">Khoa Quản trị - Tài chính</option>
-                                <option value="5">Khoa Cơ khí - Điện</option>
-                                <option value="6">Khoa Công trình</option>
-                                <option value="7">Khoa Môi trường</option>
-                                <option value="8">Khoa Ngoại ngữ</option>
-                                <option value="9">Viện Đào tạo Sau đại học</option>
                             </select>
 
                             <select name="class-list" id="class-list">
                                 <option value="none">Chọn lớp</option>
-                                <optgroup label="Khoa Hàng hải">
-                                    <option value="101">Điều khiển tàu biển</option>
-                                    <option value="102">Máy tàu thủy</option>
-                                    <option value="103">Vận tải biển</option>
-                                    <option value="104">Khai thác máy tàu biển</option>
-                                    <option value="105">Khai thác tàu biển</option>
-                                </optgroup>
-
-                                <optgroup label="Khoa Công nghệ thông tin">
-                                    <option value="201">Công nghệ thông tin</option>
-                                    <option value="202">Kỹ thuật phần mềm</option>
-                                    <option value="203">Hệ thống thông tin</option>
-                                    <option value="204">Khoa học máy tính</option>
-                                    <option value="205">Mạng máy tính và truyền thông dữ liệu</option>
-                                </optgroup>
-
-                                <optgroup label="Khoa Kinh tế">
-                                    <option value="301">Kế toán</option>
-                                    <option value="302">Kiểm toán</option>
-                                    <option value="303">Kinh tế vận tải</option>
-                                    <option value="304">Kinh tế ngoại thương</option>
-                                    <option value="305">Kinh tế quốc tế</option>
-                                </optgroup>
-
-                                <optgroup label="Khoa Quản trị - Tài chính">
-                                    <option value="401">Quản trị kinh doanh</option>
-                                    <option value="402">Quản trị khách sạn</option>
-                                    <option value="403">Quản trị dịch vụ du lịch và lữ hành</option>
-                                    <option value="404">Tài chính - Ngân hàng</option>
-                                    <option value="405">Marketing</option>
-                                </optgroup>
-
-                                <optgroup label="Khoa Cơ khí - Điện">
-                                    <option value="501">Công nghệ kỹ thuật cơ khí</option>
-                                    <option value="502">Công nghệ kỹ thuật điện - điện tử</option>
-                                    <option value="503">Công nghệ kỹ thuật điều khiển và tự động hóa</option>
-                                    <option value="504">Công nghệ kỹ thuật ô tô</option>
-                                </optgroup>
-
-                                <optgroup label="Khoa Công trình">
-                                    <option value="601">Kỹ thuật xây dựng</option>
-                                    <option value="602">Kỹ thuật công trình thủy</option>
-                                    <option value="603">Kỹ thuật cơ sở hạ tầng</option>
-                                    <option value="604">Kỹ thuật môi trường</option>
-                                </optgroup>
-
-                                <optgroup label="Khoa Môi trường">
-                                    <option value="701">Công nghệ kỹ thuật môi trường</option>
-                                    <option value="702">Quản lý tài nguyên và môi trường</option>
-                                    <option value="703">Công nghệ kỹ thuật hóa học</option>
-                                </optgroup>
-
-                                <optgroup label="Khoa Ngoại ngữ">
-                                    <option value="801">Ngôn ngữ Anh</option>
-                                    <option value="802">Ngôn ngữ Trung Quốc</option>
-                                    <option value="803">Ngôn ngữ Nhật</option>
-                                </optgroup>
-
-                                <optgroup label="Viện Đào tạo Sau đại học">
-                                    <option value="901">Thạc sĩ Quản trị kinh doanh</option>
-                                    <option value="902">Thạc sĩ Kỹ thuật tàu thủy</option>
-                                    <option value="903">Thạc sĩ Kỹ thuật cơ khí</option>
-                                    <option value="904">Thạc sĩ Kỹ thuật điện</option>
-                                </optgroup>
                             </select>
 
                             <select name="aca-year" id="aca-year">
@@ -387,15 +227,6 @@
                         </div>
                         <select name="show-user-depart" id="show-user-depart">
                             <option value="none">Chọn khoa/viện</option>
-                            <option value="1">Khoa Hàng hải</option>
-                            <option value="2">Khoa Công nghệ thông tin</option>
-                            <option value="3">Khoa Kinh tế</option>
-                            <option value="4">Khoa Quản trị - Tài chính</option>
-                            <option value="5">Khoa Cơ khí - Điện</option>
-                            <option value="6">Khoa Công trình</option>
-                            <option value="7">Khoa Môi trường</option>
-                            <option value="8">Khoa Ngoại ngữ</option>
-                            <option value="9">Viện Đào tạo Sau đại học</option>
                         </select>
 
                         <div class="label-detail-modal">
@@ -403,66 +234,6 @@
                         </div>
                         <select name="get-user-class-list" id="get-user-class-list">
                             <option value="0">Chọn lớp</option>
-                            <optgroup label="Khoa Hàng hải">
-                                <option value="101">Điều khiển tàu biển</option>
-                                <option value="102">Máy tàu thủy</option>
-                                <option value="103">Vận tải biển</option>
-                                <option value="104">Khai thác máy tàu biển</option>
-                                <option value="105">Khai thác tàu biển</option>
-                            </optgroup>
-                            <optgroup label="Khoa Công nghệ thông tin">
-                                <option value="201">Công nghệ thông tin</option>
-                                <option value="202">Kỹ thuật phần mềm</option>
-                                <option value="203">Hệ thống thông tin</option>
-                                <option value="204">Khoa học máy tính</option>
-                                <option value="205">Mạng máy tính và truyền thông dữ liệu</option>
-                            </optgroup>
-                            <optgroup label="Khoa Kinh tế">
-                                <option value="301">Kế toán</option>
-                                <option value="302">Kiểm toán</option>
-                                <option value="303">Kinh tế vận tải</option>
-                                <option value="304">Kinh tế ngoại thương</option>
-                                <option value="305">Kinh tế quốc tế</option>
-                            </optgroup>
-                            <optgroup label="Khoa Quản trị - Tài chính">
-                                <option value="401">Quản trị kinh doanh</option>
-                                <option value="402">Quản trị khách sạn</option>
-                                <option value="403">Quản trị dịch vụ du lịch và lữ hành</option>
-                                <option value="404">Tài chính - Ngân hàng</option>
-                                <option value="405">Marketing</option>
-                            </optgroup>
-                            <optgroup label="Khoa Cơ khí - Điện">
-                                    <option value="501">Công nghệ kỹ thuật cơ khí</option>
-                                    <option value="502">Công nghệ kỹ thuật điện - điện tử</option>
-                                    <option value="503">Công nghệ kỹ thuật điều khiển và tự động hóa</option>
-                                    <option value="504">Công nghệ kỹ thuật ô tô</option>
-                                </optgroup>
-
-                                <optgroup label="Khoa Công trình">
-                                    <option value="601">Kỹ thuật xây dựng</option>
-                                    <option value="602">Kỹ thuật công trình thủy</option>
-                                    <option value="603">Kỹ thuật cơ sở hạ tầng</option>
-                                    <option value="604">Kỹ thuật môi trường</option>
-                                </optgroup>
-
-                                <optgroup label="Khoa Môi trường">
-                                    <option value="701">Công nghệ kỹ thuật môi trường</option>
-                                    <option value="702">Quản lý tài nguyên và môi trường</option>
-                                    <option value="703">Công nghệ kỹ thuật hóa học</option>
-                                </optgroup>
-
-                                <optgroup label="Khoa Ngoại ngữ">
-                                    <option value="801">Ngôn ngữ Anh</option>
-                                    <option value="802">Ngôn ngữ Trung Quốc</option>
-                                    <option value="803">Ngôn ngữ Nhật</option>
-                                </optgroup>
-
-                                <optgroup label="Viện Đào tạo Sau đại học">
-                                    <option value="901">Thạc sĩ Quản trị kinh doanh</option>
-                                    <option value="902">Thạc sĩ Kỹ thuật tàu thủy</option>
-                                    <option value="903">Thạc sĩ Kỹ thuật cơ khí</option>
-                                    <option value="904">Thạc sĩ Kỹ thuật điện</option>
-                                </optgroup>
                         </select>
 
                         <div class="label-detail-modal">
@@ -548,11 +319,11 @@
 
             </div>
             <div class="modal-footer" style="display: flex; align-items:center; justify-content:end">
-                <button type="button" class="btn btn-outline-danger" style="width: 200px; margin-right: 10px" onclick="saveDetailChanges()">
+                <button type="button" class="btn btn-outline-danger" style="width: 200px; margin-right: 10px" onclick="deleteUser()">
                     <i class="bi bi-trash"></i>
                     Xóa tài khoản
                 </button>
-                <button type="button" class="btn btn-outline-primary" style="width: 200px; margin-left: 0px" onclick="deleteUser()">
+                <button type="button" class="btn btn-outline-primary" style="width: 200px; margin-left: 0px" onclick="saveDetailChanges()">
                     <i class="bi bi-save"></i>
                     Lưu thay đổi
                 </button>
@@ -561,3 +332,7 @@
     </div>
 </div>
 </div>
+<script src="chidoan.js"></script>
+<script src="select_data.js"></script>
+<script src="lop.js"></script>
+<script src="modal_handlers.js"></script>

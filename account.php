@@ -121,11 +121,6 @@ $activities = $stmt_activity->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="manage_modal.css">
     <title>Hồ sơ Đoàn viên</title>
     <style>
-        @font-face {
-            font-family: 'Bahnschrift';
-            src: url('https://fonts.cdnfonts.com/css/bahnschrift') format('woff2');
-        }
-
         :root {
             --primary-color: #2832c2;
             --secondary-color: #1a237e;
@@ -431,7 +426,7 @@ $activities = $stmt_activity->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 </div>
                 <div class="d-flex justify-content-end mb-4">
-                    <button onclick="logout()" class="btn btn-danger">
+                    <button onclick="logout()" class="btn btn-danger" style="height: 40px;">
                         <i class="bi bi-box-arrow-right me-2"></i>Đăng xuất
                     </button>
                 </div>
@@ -440,6 +435,15 @@ $activities = $stmt_activity->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function loadPage(page) {
+            if (localStorage.getItem("myID" == null)) {
+                window.location.href = "Login.php";
+            } else {
+                window.location.href = page;
+            }
+        }
+    </script>
     <script>
         // Thêm hàm logout
         function logout() {
