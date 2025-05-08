@@ -1,3 +1,21 @@
+<?php
+session_start();
+
+// Check if user is not logged in
+if (!isset($_SESSION['id']) || empty($_SESSION['id'])) {
+    header("Location: Login.php");
+    exit();
+}
+
+// Check if user has required role
+if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'canbodoan')) {
+    echo "<script>
+        alert('Bạn không có quyền truy cập trang này!');
+        window.location.href = 'dashboard.php';
+    </script>";
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -24,7 +42,7 @@
             font-size: 16px;
         }
 
-        .container{
+        .container {
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -141,23 +159,28 @@
             font-size: 16px;
             color: #2832c2;
         }
-        .handle-button button{
+
+        .handle-button button {
             font-family: var(--baseFont);
             font-size: 16px;
         }
-        .form-select{
+
+        .form-select {
             font-family: var(--baseFont);
             font-size: 16px;
         }
-        #handle-event-container input{
+
+        #handle-event-container input {
             height: 40px !important;
             font-family: var(--baseFont);
             font-size: 16px;
         }
+
         .table {
             font-family: var(--baseFont);
             color: var(--fontGray);
-        }   
+        }
+
         .table thead th {
             background-color: #f8f9fa;
             border-bottom: 2px solid #dee2e6;
@@ -169,6 +192,7 @@
             text-align: center;
             vertical-align: middle;
         }
+
         .table td {
             vertical-align: middle;
             font-family: var(--baseFont);
@@ -177,81 +201,102 @@
             padding: 12px;
             text-align: center;
         }
+
         .table tbody tr {
             cursor: default;
             transition: background-color 0.2s;
         }
+
         .table tbody tr:hover {
             background-color: var(--whiteGray);
         }
+
         .table tbody tr td:first-child {
             text-align: center;
         }
+
         .table tbody tr td:nth-child(2) {
             text-align: center;
         }
+
         .table tbody tr td:nth-child(3) {
             text-align: center;
         }
+
         .table tbody tr td:nth-child(4) {
             text-align: center;
         }
+
         .table tbody tr td:nth-child(5) {
             text-align: center;
         }
+
         .table tbody tr td:nth-child(6) {
             text-align: center;
         }
+
         .table tbody tr td:nth-child(7) {
             text-align: center;
         }
+
         .table tbody tr td:nth-child(8) {
             text-align: center;
         }
+
         .table tbody tr td:nth-child(9) {
             text-align: center;
         }
+
         .status-badge {
             padding: 5px 10px;
             border-radius: 15px;
             font-size: 0.85em;
             font-family: var(--baseFont);
         }
+
         .status-pending {
             background-color: #ffc107;
             color: #000;
         }
+
         .status-approved {
             background-color: #28a745;
             color: #fff;
         }
+
         .status-completed {
             background-color: #6c757d;
             color: #fff;
         }
+
         .action-buttons {
             display: flex;
             gap: 5px;
             justify-content: center;
         }
+
         .action-buttons .btn {
             padding: 0.25rem 0.5rem;
             font-family: var(--baseFont);
             font-size: 15px;
             border-width: 1px;
         }
+
         .action-buttons .btn-outline-primary {
             color: var(--mainBlue);
             border-color: var(--mainBlue);
         }
+
         .action-buttons .btn-outline-primary:hover {
             background-color: var(--mainBlue);
             color: white;
         }
+
         .action-buttons .btn-outline-danger {
             color: #dc3545;
             border-color: #dc3545;
         }
+
         .action-buttons .btn-outline-danger:hover {
             background-color: #dc3545;
             color: white;
@@ -265,13 +310,6 @@
 
     <div id="main-container">
         <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2>Quản lý hoạt động</h2>
-                <button class="btn btn-primary" onclick="loadAddActivityModal()">
-                    <i class="bi bi-plus-lg"></i> Thêm hoạt động mới
-                </button>
-            </div>
-
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="row g-3">
@@ -292,7 +330,7 @@
                                 <option value="tinhNguyen">Tình nguyện</option>
                             </select>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="input-group">
                                 <input type="text" class="form-control" id="search-input" placeholder="Tìm kiếm hoạt động..." onkeyup="filterActivities()">
                                 <button class="btn btn-outline-secondary" type="button">
@@ -300,28 +338,32 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" onclick="loadAddActivityModal()" style="height:40px; width:100%">
+                                <i class="bi bi-plus-lg"></i> Thêm hoạt động     
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Tên hoạt động</th>
-                            <th>Ngày tổ chức</th>
-                            <th>Địa điểm</th>
-                            <th>Loại hoạt động</th>
-                            <th>Số lượng tham gia</th>
-                            <th>Điểm</th>
-                            <th>Trạng thái</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody id="activities-container">
-                        <!-- Activities will be loaded here -->
-                    </tbody>
-                </table>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên hoạt động</th>
+                        <th>Ngày tổ chức</th>
+                        <th>Địa điểm</th>
+                        <th>Loại hoạt động</th>
+                        <th>Số lượng tham gia</th>
+                        <th>Điểm</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="activities-container">
+                    <!-- Activities will be loaded here -->
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -507,7 +549,7 @@
             }
 
             const formData = new FormData();
-            
+
             // Get form values
             formData.append('ten_hoat_dong', document.getElementById('activity-name').value.trim());
             formData.append('ngay_to_chuc', document.getElementById('activity-date').value);
@@ -516,32 +558,32 @@
             formData.append('dia_diem', document.getElementById('activity-location').value.trim());
             formData.append('loai_hoat_dong', document.getElementById('activity-type').value);
             formData.append('so_luong_tham_gia', document.getElementById('activity-capacity').value);
-            
+
             // Add user ID if available (you might want to get this from your session)
             const userId = 1; // Replace with actual user ID from session
             formData.append('nguoi_tao', userId);
 
             // Send request to save activity
             fetch('save_activity.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert(data.message);
-                    // Close modal and reload page
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('addActivityModal'));
-                    modal.hide();
-                    location.reload();
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Có lỗi xảy ra khi lưu hoạt động');
-            });
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert(data.message);
+                        // Close modal and reload page
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('addActivityModal'));
+                        modal.hide();
+                        location.reload();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra khi lưu hoạt động');
+                });
         }
 
         // Helper function to format date for datetime-local input
@@ -550,17 +592,17 @@
             const [datePart, timePart] = dateStr.split(' ');
             const [day, month, year] = datePart.split('/');
             const [hours, minutes] = timePart ? timePart.split(':') : ['00', '00'];
-            
+
             // Create date object with local timezone
             const date = new Date(year, month - 1, day, hours, minutes);
-            
+
             // Format to YYYY-MM-DDThh:mm
             const year2 = date.getFullYear();
             const month2 = String(date.getMonth() + 1).padStart(2, '0');
             const day2 = String(date.getDate()).padStart(2, '0');
             const hours2 = String(date.getHours()).padStart(2, '0');
             const minutes2 = String(date.getMinutes()).padStart(2, '0');
-            
+
             return `${year2}-${month2}-${day2}T${hours2}:${minutes2}`;
         }
 
@@ -586,22 +628,22 @@
             formData.append('activity_id', activityId);
 
             fetch('delete_activity.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert(data.message);
-                    location.reload(); // Reload page to update table
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Có lỗi xảy ra khi xóa hoạt động');
-            });
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert(data.message);
+                        location.reload(); // Reload page to update table
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra khi xóa hoạt động');
+                });
         }
 
         // Function to load activity details
@@ -611,7 +653,7 @@
                 .then(data => {
                     if (data.status === 'success') {
                         const activity = data.data;
-                        
+
                         // Populate modal with activity data
                         document.getElementById('detail-activity-name').value = activity.ten_hoat_dong;
                         document.getElementById('detail-activity-date').value = activity.ngay_to_chuc;
@@ -623,7 +665,7 @@
                         document.getElementById('detail-activity-status').value = activity.trang_thai;
                         document.getElementById('detail-activity-created').value = activity.ngay_tao;
                         document.getElementById('detail-activity-creator').value = activity.nguoi_tao;
-                        
+
                         // Show the modal
                         const detailModal = new bootstrap.Modal(document.getElementById('detailActivityModal'));
                         detailModal.show();

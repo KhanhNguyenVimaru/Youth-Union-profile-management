@@ -22,13 +22,12 @@ async function loadActivities() {
     }
 }
 
-// Display activities in the table
 function displayActivities(activitiesToShow) {
     const container = document.getElementById('activities-container');
     container.innerHTML = '';
 
     activitiesToShow.forEach((activity, index) => {
-        const row = document.createElement('tr');
+        const row = document.createElement('tr');   
         row.innerHTML = `
             <td>${index + 1}</td>
             <td>${activity.ten_hoat_dong}</td>
