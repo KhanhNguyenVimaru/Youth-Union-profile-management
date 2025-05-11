@@ -20,9 +20,9 @@ $ngay_to_chuc = isset($_POST['ngay_to_chuc']) ? $_POST['ngay_to_chuc'] : null;
 $noi_dung = isset($_POST['noi_dung']) ? $_POST['noi_dung'] : null;
 $diem = isset($_POST['diem']) ? $_POST['diem'] : 0;
 $dia_diem = isset($_POST['dia_diem']) ? $_POST['dia_diem'] : null;
-$loai_hoat_dong = $_POST['loai_hoat_dong'] ;
+$loai_hoat_dong = $_POST['loai_hoat_dong'];
 $so_luong_tham_gia = isset($_POST['so_luong_tham_gia']) ? $_POST['so_luong_tham_gia'] : 0;
-$nguoi_tao = isset($_POST['nguoi_tao']) ? $_POST['nguoi_tao'] : null;
+$id_actor = isset($_POST['id_actor']) ? intval($_POST['id_actor']) : 0;
 
 try {
     // Start transaction
@@ -54,17 +54,26 @@ try {
         $dia_diem,         // varchar(255)
         $loai_hoat_dong,   // varchar(100)
         $so_luong_tham_gia,// int(11)
-        $nguoi_tao         // int(11)
+        $id_actor          // int(11) - sử dụng id_actor làm nguoi_tao
     );
 
     // Execute the statement
     if ($stmt->execute()) {
+        $activity_id = $conn->insert_id;
+        
+        // Insert notification
+        $noidung = "thêm hoạt động " . $activity_id;
+        $stmt_notify = $conn->prepare("INSERT INTO thongbao (id_actor, loai, noidung, id_affected) VALUES (?, 'insert', ?, ?)");
+        $stmt_notify->bind_param("isi", $id_actor, $noidung, $activity_id);
+        $stmt_notify->execute();
+        $stmt_notify->close();
+
         $conn->commit();
 
         echo json_encode([
             'status' => 'success',
             'message' => 'Hoạt động đã được thêm thành công',
-            'activity_id' => $conn->insert_id
+            'activity_id' => $activity_id
         ]);
     } else {
         throw new Exception($stmt->error);
@@ -78,3 +87,12 @@ try {
         'message' => $e->getMessage()
     ]);
 }
+
+// Close prepared statements
+if (isset($stmt)) {
+    $stmt->close();
+}
+
+// Close database connection
+$conn->close();
+?>

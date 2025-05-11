@@ -26,15 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["role"] = $row["chuc_vu"];
             header("Location: Dashboard.php");
             exit();
-        }else{
-            echo '<script>alert("Tài khoản hoặc mật khẩu không hợp lệ");</script>';
-            header("Location: Dashboard.php");
+        } else {
+            header("Location: login.php");
             exit();
         }
+    } else {
+        header("Location: login.php");
+        exit();
     }
-
-    echo '<script>alert("Tài khoản hoặc mật khẩu không hợp lệ");</script>';
-    exit();
 }
 ?>
 

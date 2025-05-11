@@ -41,19 +41,19 @@ async function populateSelects() {
         lopSelects.forEach(select => {
             while (select.options.length > 1) select.remove(1);
             
-            // Group classes by khoa
+            // Group classes by chi đoàn
             const groupedLop = data.lop.reduce((acc, item) => {
-                const khoaId = item.khoa_id;
-                if (!acc[khoaId]) acc[khoaId] = [];
-                acc[khoaId].push(item);
+                const chidoanId = item.chidoan_id;
+                if (!acc[chidoanId]) acc[chidoanId] = [];
+                acc[chidoanId].push(item);
                 return acc;
             }, {});
 
-            // Add options grouped by khoa
-            Object.entries(groupedLop).forEach(([khoaId, classes]) => {
+            // Add options grouped by chi đoàn
+            Object.entries(groupedLop).forEach(([chidoanId, classes]) => {
                 const optgroup = document.createElement('optgroup');
-                const khoaName = data.chidoan.find(k => k.id === parseInt(khoaId))?.ten_chidoan || `Khoa ${khoaId}`;
-                optgroup.label = khoaName;
+                const chidoanName = data.chidoan.find(c => c.id === parseInt(chidoanId))?.ten_chidoan || `Chi đoàn ${chidoanId}`;
+                optgroup.label = chidoanName;
                 
                 classes.forEach(item => {
                     const option = document.createElement('option');

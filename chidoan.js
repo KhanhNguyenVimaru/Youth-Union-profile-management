@@ -1,4 +1,4 @@
-// Function to fetch chidoan data
+ // Function to fetch chidoan data
 async function fetchChidoan() {
     try {
         const response = await fetch('get_chidoan.php');

@@ -8,71 +8,107 @@ if (!isset($_SESSION['id']) || empty($_SESSION['id'])) {
 }
 
 // Check if user has required role
-if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin')) {
-    echo "<script>
-        alert('Bạn không có quyền truy cập trang này!');
-        window.location.href = 'dashboard.php';
-    </script>";
-    exit();
-}
+// if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'canbodoan')) {
+//     echo "<script>
+//         alert('Bạn không có quyền truy cập trang này!');
+//         window.location.href = 'dashboard.php';
+//     </script>";
+//     exit();
+// }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý thông báo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/vi/0/09/Huy_Hi%E1%BB%87u_%C4%90o%C3%A0n.png">
     <link rel="stylesheet" href="nav.css">
     <link rel="stylesheet" href="Manage.css">
-    <link rel="stylesheet" href="manage_modal.css">
-    <title>Hồ sơ Đoàn viên</title>
+    <style>
+        body {
+            font-family: Bahnschrift;
+            background-color: #f1f3f5;
+        }
+
+        .notify-wrapper {
+            width: 90%;
+            max-width: 1600px;
+            margin: 20px auto;
+        }
+
+        .notify-bar {
+            background-color: #f8f9fa;
+            padding: 20px 50px;
+            border-radius: 8px;
+            font-weight: normal;
+            font-size: 1rem;
+            height: 90vh;
+        }
+
+        #database-handle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #users-data-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .table-col {
+            background-color: #f8f9fa;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- nav bar here -->
     <?php include "Navbar.php" ?>
-    <?php include "manage_modal.php" ?>
-    <div class="container-fluid" id="user-management">
-
-        <div class="user-management-div" id="show-users-list">
+    <div class="notify-wrapper">
+        <div class="notify-bar">
             <div id="database-handle">
-                <h5>DANH SÁCH TÀI KHOẢN</h5>
-                <div style="margin-left: auto;">
-                    <button type="button" class="btn btn-primary" onclick="loadSignUpModal()" id="call-modal-signin">
-                        <i class="bi bi-person-plus"></i>
-                        Thêm thành viên
-                    </button>
+                <h5>DANH SÁCH THÔNG BÁO</h5>
+                <div style="display: flex; width: auto;margin-left: auto;">
+                    <input type="text" class="form-control" style="width: 200px; margin-right: 10px;" placeholder="Tìm kiếm thông báo...">
                     <button type="button" class="btn btn-secondary" id="reset-list-btn" onclick="resetPage()">
                         <i class="bi bi-arrow-clockwise"></i>
                         Reset
                     </button>
-                    <button type="button" class="btn btn-secondary" style="margin-left: 10px;" id="filter-list-btn" onclick="loadFilter()">
+                    <button type="button" class="btn btn-secondary" style="margin-left: 10px;" id="filter-list-btn">
                         <i class="bi bi-filter"></i>
                         Filter
                     </button>
                 </div>
             </div>
+
             <div id="users-data-container">
                 <table class="table table-hover" id="users-data-board">
                     <thead>
                         <tr class="table-col">
-                            <th scope="col">MSV</th>
-                            <th scope="col">Họ tên</th>
-                            <th scope="col">Ngày sinh</th>
-                            <th scope="col">Lớp</th>
-                            <th scope="col">Chi đoàn</th>
-                            <th scope="col">Số điện thoại</th>
-                            <th scope="col">Email</th>
+                            <th scope="col" style="width: 10%;">Mã thông báo</th>
+                            <th scope="col" style="width: 15%;">Người tạo</th>
+                            <th scope="col" style="width: 15%;">Loại hoạt động</th>
+                            <th scope="col" style="width: 40%;">Nội dung</th>
+                            <th scope="col" style="width: 20%;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody id="show-data-here">
                         <!-- Kết quả sẽ được chèn vào đây bởi AJAX -->
                     </tbody>
                 </table>
-                <div class="pagination-container" style="display: flex; justify-content: center; margin-top: 20px;">
+                <div class="pagination-container">
                     <nav aria-label="Page navigation">
                         <ul class="pagination" id="pagination-controls">
                             <li class="page-item">
@@ -91,14 +127,14 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin')) {
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="index.js"></script>
+    <script>
+        function resetPage() {
+            window.location.reload();
+        }
+    </script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-<script src="index.js"></script>
-<script src="manage_user.js"></script>
-<script>
-    function resetPage() {
-        window.location.reload();
-    }
-</script>
 
 </html>

@@ -40,9 +40,6 @@ try {
         ['id' => 'admin', 'ten_chucvu' => 'Quản trị viên'],
         ['id' => 'doanvien', 'ten_chucvu' => 'Đoàn viên'],
         ['id' => 'canbodoan', 'ten_chucvu' => 'Cán bộ Đoàn'],
-        ['id' => 'bithu', 'ten_chucvu' => 'Bí thư'],
-        ['id' => 'phobithu', 'ten_chucvu' => 'Phó Bí thư'],
-        ['id' => 'uyvien', 'ten_chucvu' => 'Ủy viên Ban Chấp hành']
     ];
 
     // Return the data as JSON

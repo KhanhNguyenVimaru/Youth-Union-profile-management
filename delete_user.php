@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // Lấy dữ liệu từ request
 $data = json_decode(file_get_contents('php://input'), true);
 $userId = $data['id'] ?? null;
-
+$id_actor = $data['id_actor'] ?? null;
 // Kiểm tra dữ liệu đầu vào
 if (!$userId) {
     echo json_encode(['success' => false, 'message' => 'Thiếu thông tin người dùng']);
@@ -44,6 +44,13 @@ try {
 
     // Commit transaction nếu mọi thứ thành công
     $conn->commit();
+    
+    // Insert notification
+    $noidung = "xóa đoàn viên " . $userId;
+    $stmt_notify = $conn->prepare("INSERT INTO thongbao (id_actor, loai, noidung, id_affected) VALUES (?, 'delete', ?, ?)");
+    $stmt_notify->bind_param("isi", $id_actor, $noidung, $userId);
+    $stmt_notify->execute();
+    $stmt_notify->close();
     
     echo json_encode([
         'success' => true,

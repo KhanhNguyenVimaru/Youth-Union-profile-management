@@ -109,8 +109,9 @@ function loadAddActivityModal() {
 async function saveActivity() {
     const form = document.getElementById('addActivityForm');
     const formData = new FormData(form);
-    // Nếu cần thêm userId từ session, có thể thêm dòng sau:
-    // formData.append('nguoi_tao', userId);
+    // Thêm id_actor từ localStorage
+    formData.append('id_actor', localStorage.getItem('myID'));
+    
     try {
         const response = await fetch('save_activity.php', {
             method: 'POST',
@@ -186,15 +187,19 @@ async function viewActivity(id) {
     modal.show();
 }
 
-// Delete activity
 async function deleteActivity(id) {
     if (!confirm('Bạn có chắc chắn muốn xóa hoạt động này?')) {
         return;
     }
 
     try {
-        const response = await fetch(`delete_activity.php?id=${id}`, {
-            method: 'DELETE'
+        const formData = new FormData();
+        formData.append('activity_id', id);
+        formData.append('id_actor', localStorage.getItem('myID'));
+
+        const response = await fetch('delete_activity.php', {
+            method: 'POST',
+            body: formData
         });
 
         if (!response.ok) {
@@ -202,7 +207,7 @@ async function deleteActivity(id) {
         }
 
         const result = await response.json();
-        if (result.success) {
+        if (result.status === 'success') {
             loadActivities();
             alert('Xóa hoạt động thành công');
         } else {
@@ -214,13 +219,11 @@ async function deleteActivity(id) {
     }
 }
 
-// Load edit activity modal
-function loadEditActivityModal(id) {
-    if (!id) return;
+// function loadEditActivityModal(id) {
+//     if (!id) return;
 
-    const activity = activities.find(a => a.id === id);
-    if (!activity) return;
+//     const activity = activities.find(a => a.id === id);
+//     if (!activity) return;
 
-    // TODO: Implement edit functionality
-    alert('Chức năng chỉnh sửa đang được phát triển');
-} 
+//     alert('Chức năng chỉnh sửa đang được phát triển');
+// } 

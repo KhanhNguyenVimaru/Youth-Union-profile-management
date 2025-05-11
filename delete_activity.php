@@ -42,6 +42,14 @@ try {
 
     // Check if any rows were affected
     if ($delete_activity->affected_rows > 0) {
+        // Insert notification
+        $id_actor = isset($_POST['id_actor']) ? intval($_POST['id_actor']) : 0;
+        $noidung = "xóa hoạt động " . $activity_id;
+        $stmt_notify = $conn->prepare("INSERT INTO thongbao (id_actor, loai, noidung, id_affected) VALUES (?, 'delete', ?, ?)");
+        $stmt_notify->bind_param("isi", $id_actor, $noidung, $activity_id);
+        $stmt_notify->execute();
+        $stmt_notify->close();
+
         // Commit transaction
         $conn->commit();
         

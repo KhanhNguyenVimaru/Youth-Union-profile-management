@@ -40,6 +40,7 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['ro
         body {
             font-family: var(--baseFont);
             font-size: 16px;
+            background-color: #f2f3f5;
         }
 
         .container {
@@ -301,6 +302,13 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['ro
             background-color: #dc3545;
             color: white;
         }
+        #data-head{
+            background-color: white !important;
+        }
+        #data-head{
+            border: none !important;
+            margin-bottom: 20px !important;
+        }
     </style>
 </head>
 
@@ -310,7 +318,7 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['ro
 
     <div id="main-container">
         <div class="container">
-            <div class="card mb-4">
+            <div class="card mb-4" id = "data-head">
                 <div class="card-body">
                     <div class="row g-3">
                         <div class="col-md-3">
@@ -318,16 +326,15 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['ro
                                 <option value="">Tất cả trạng thái</option>
                                 <option value="chờ duyệt">Chờ duyệt</option>
                                 <option value="đã duyệt">Đã duyệt</option>
-                                <option value="đã kết thúc">Đã kết thúc</option>
                             </select>
                         </div>
                         <div class="col-md-3">
                             <select class="form-select" id="type-filter" onchange="filterActivities()">
                                 <option value="">Tất cả loại hoạt động</option>
-                                <option value="hocTap">Học tập</option>
-                                <option value="vanNghe">Văn nghệ</option>
-                                <option value="theThao">Thể thao</option>
-                                <option value="tinhNguyen">Tình nguyện</option>
+                                <option value="Học tập">Học tập</option>
+                                <option value="Văn nghệ">Văn nghệ</option>
+                                <option value="Thể thao">Thể thao</option>
+                                <option value="Tình nguyện">Tình nguyện</option>
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -340,14 +347,14 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['ro
                         </div>
                         <div class="col-md-2">
                             <button class="btn btn-primary" onclick="loadAddActivityModal()" style="height:40px; width:100%">
-                                <i class="bi bi-plus-lg"></i> Thêm hoạt động     
+                                <i class="bi bi-plus-lg"></i> Thêm hoạt động
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
             <table class="table table-hover">
-                <thead>
+                <thead class="table-col">
                     <tr>
                         <th>STT</th>
                         <th>Tên hoạt động</th>
@@ -356,8 +363,8 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['ro
                         <th>Loại hoạt động</th>
                         <th>Số lượng tham gia</th>
                         <th>Điểm</th>
-                        <th>Trạng thái</th>
-                        <th>Thao tác</th>
+                        <th>Chi tiết</th>
+                        <th>Xóa</th>
                     </tr>
                 </thead>
                 <tbody id="activities-container">
@@ -394,10 +401,10 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['ro
                                 <label class="form-label">Loại hoạt động</label>
                                 <select class="form-select" id="activity-type" required>
                                     <option value="">Chọn loại hoạt động</option>
-                                    <option value="hocTap">Học tập</option>
-                                    <option value="vanNghe">Văn nghệ</option>
-                                    <option value="theThao">Thể thao</option>
-                                    <option value="tinhNguyen">Tình nguyện</option>
+                                    <option value="Học tập">Học tập</option>
+                                    <option value="Văn nghệ">Văn nghệ</option>
+                                    <option value="Thể thao">Thể thao</option>
+                                    <option value="Tình nguyện">Tình nguyện</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
@@ -550,7 +557,6 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['ro
 
             const formData = new FormData();
 
-            // Get form values
             formData.append('ten_hoat_dong', document.getElementById('activity-name').value.trim());
             formData.append('ngay_to_chuc', document.getElementById('activity-date').value);
             formData.append('noi_dung', document.getElementById('activity-content').value.trim());

@@ -159,9 +159,6 @@
                                 <option value="admin">Quản trị viên</option>
                                 <option value="doanvien">Đoàn viên</option>
                                 <option value="canbodoan">Cán bộ Đoàn</option>
-                                <option value="bithu">Bí thư</option>
-                                <option value="phobithu">Phó Bí thư</option>
-                                <option value="uyvien">Ủy viên Ban Chấp hành</option>
                             </select>
                         </div>
                     </div>
@@ -258,9 +255,6 @@
                             <option value="admin">Quản trị viên</option>
                             <option value="doanvien">Đoàn viên</option>
                             <option value="canbodoan">Cán bộ Đoàn</option>
-                            <option value="bithu">Bí thư</option>
-                            <option value="phobithu">Phó Bí thư</option>
-                            <option value="uyvien">Ủy viên Ban Chấp hành</option>
                         </select>
                     </div>
 

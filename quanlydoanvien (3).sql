@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 08, 2025 lúc 05:56 PM
+-- Thời gian đã tạo: Th5 11, 2025 lúc 08:49 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -127,9 +127,10 @@ INSERT INTO `doanvien` (`id`, `ho_ten`, `gioi_tinh`, `ngay_sinh`, `lop_id`, `chi
 (38, 'Châu Văn AL', 'Nam', '2002-01-01', 904, 9, 9, 'chauvanal@example.com', '0912345715', 'doanvien', 64, 'pass123'),
 (39, 'Lâm Thị AM', 'Nữ', '2003-11-11', 903, 9, 9, 'lamthiam@example.com', '0912345716', 'admin', 65, 'pass123'),
 (40, 'Đoàn Văn AN', 'Nam', '2001-09-09', 902, 9, 9, 'doanvanan@example.com', '0912345717', 'doanvien', 62, 'pass123'),
+(101, 'Chu Thùy Dương', 'Nữ', '2006-03-02', 801, 8, 8, 'Duong0302@gmail.com', '0928564126', 'canbodoan', 65, '$2y$10$/wGi3yGC2cQt/dzDnnv76OJLN9WePa588v1/CjuduSicVCpJlS03y'),
+(102138, 'Hieu Ngu', 'Nam', '0000-00-00', 501, 5, 5, 'khanhnd05@gmail.com', '0928564126', 'admin', 63, '$2y$10$wL.SpObDlWa1mQCLq85WAua9DOOfqUjtdiD55fPCXMH1Z5REHtw9C'),
 (102151, 'Nguyen Khanh', 'Nam', '2005-11-04', 202, 2, 2, 'khanhnd05@gmail.com', '0928564126', 'admin', 64, '$2y$10$OKltxyFwl2Nj.dFy8AqfLONFtNE5K66Pr5o75LvijDo0kjXuoLycS'),
-(222, 'Hieu Ngu', 'Nam', '2005-01-11', 201, 2, 2, 'hieungu@gmail.com', '0928564126', 'doanvien', 64, '$2y$10$ddk73F.SMkO6JRRjd0tNgeFAzYJYslgWSCgOLRDQMPX4JaDhNdM.6'),
-(101, 'Chu Thùy Dương', 'Nữ', '2006-03-02', 801, 8, 8, 'Duong0302@gmail.com', '0928564126', 'canbodoan', 65, '$2y$10$/wGi3yGC2cQt/dzDnnv76OJLN9WePa588v1/CjuduSicVCpJlS03y');
+(102152, 'Nguyen Khanh', 'Nam', '2005-11-04', 201, 2, 2, 'khanhnd05@gmail.com', '0928564126', 'admin', 64, '$2y$10$Q..ZwDWSQB/nelEKnXhFZuZisWW5M.tgtPlRXNtFM1Hj2aJs2wAYq');
 
 -- --------------------------------------------------------
 
@@ -150,6 +151,13 @@ CREATE TABLE `hoatdong` (
   `nguoi_tao` int(11) DEFAULT NULL,
   `trang_thai` enum('chờ duyệt','đã duyệt','đã kết thúc') DEFAULT 'chờ duyệt'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `hoatdong`
+--
+
+INSERT INTO `hoatdong` (`id`, `ten_hoat_dong`, `ngay_to_chuc`, `noi_dung`, `diem`, `dia_diem`, `loai_hoat_dong`, `so_luong_tham_gia`, `ngay_tao`, `nguoi_tao`, `trang_thai`) VALUES
+(25, 'Hè xanh 2025', '2025-05-22', 'hè xanh', 1000, 'Sơn La', 'Văn nghệ', 100, '2025-05-10 22:41:20', 1, 'chờ duyệt');
 
 -- --------------------------------------------------------
 
@@ -236,6 +244,20 @@ CREATE TABLE `thamgia` (
   `ghi_chu` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `thongbao`
+--
+
+CREATE TABLE `thongbao` (
+  `id` int(11) NOT NULL,
+  `id_actor` int(11) DEFAULT NULL,
+  `loai` varchar(50) DEFAULT NULL,
+  `noidung` varchar(200) DEFAULT NULL,
+  `id_affected` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
@@ -252,6 +274,12 @@ ALTER TABLE `chidoan`
 ALTER TABLE `doanphi`
   ADD PRIMARY KEY (`id`),
   ADD KEY `doanvien_id` (`doanvien_id`);
+
+--
+-- Chỉ mục cho bảng `doanvien`
+--
+ALTER TABLE `doanvien`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `hoatdong`
@@ -281,6 +309,13 @@ ALTER TABLE `thamgia`
   ADD KEY `hoatdong_id` (`hoatdong_id`);
 
 --
+-- Chỉ mục cho bảng `thongbao`
+--
+ALTER TABLE `thongbao`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_tacgia` (`id_affected`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -300,7 +335,7 @@ ALTER TABLE `doanphi`
 -- AUTO_INCREMENT cho bảng `hoatdong`
 --
 ALTER TABLE `hoatdong`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT cho bảng `hoso`
@@ -319,6 +354,12 @@ ALTER TABLE `lop`
 --
 ALTER TABLE `thamgia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `thongbao`
+--
+ALTER TABLE `thongbao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

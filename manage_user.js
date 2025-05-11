@@ -47,7 +47,8 @@ document.getElementById("insert-user-btn").addEventListener("click", function ()
         department: department,
         role: role,
         birthdate: birthdate,
-        yearin: yearin
+        yearin: yearin,
+        insert_admin : localStorage.getItem("myID")
     };
     console.log(user);
 
@@ -297,7 +298,8 @@ function saveDetailChanges() {
         email: document.getElementById('show-user-email').value,
         sdt: document.getElementById('show-user-tel').value,
         chuc_vu: document.getElementById('show-user-role').value,
-        nienkhoa: document.getElementById('show-user-year-in').value
+        nienkhoa: document.getElementById('show-user-year-in').value,
+        actor_id : localStorage.getItem("myID")
     };
 
     // Create FormData object to handle file upload
@@ -336,6 +338,11 @@ function saveDetailChanges() {
 // Function to handle deleting user
 function deleteUser() {
     const userId = seletedUserID.id;
+    const DeleteData = {
+        id : userId,
+        id_actor  : localStorage.getItem("myID")
+    }
+    console.log(DeleteData);
     
     if (confirm('Bạn có chắc chắn muốn xóa tài khoản này?')) {
         fetch('delete_user.php', {
@@ -343,17 +350,17 @@ function deleteUser() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id: userId })
+            body: JSON.stringify(DeleteData)
         })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
                 alert('Xóa tài khoản thành công!');
-                // Refresh the user list
-                loadUserList();
-                // Close the modal
+
                 const detailModal = bootstrap.Modal.getInstance(document.getElementById('detail-data'));
                 detailModal.hide();
+
+                window.location.reload();
             } else {
                 alert('Có lỗi xảy ra: ' + data.message);
             }

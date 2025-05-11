@@ -1,7 +1,7 @@
 // Function to fetch khoa data
 async function fetchKhoa() {
     try {
-        const response = await fetch('get_khoa.php');
+        const response = await fetch('get_chidoan.php.php');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -29,7 +29,7 @@ async function populateKhoaSelects() {
         khoaData.forEach(khoa => {
             const option = document.createElement('option');
             option.value = khoa.id;
-            option.textContent = khoa.ten_khoa;
+            option.textContent = khoa.ten_chidoan;
             select.appendChild(option);
         });
     });

@@ -34,6 +34,7 @@ $department = $data['department'];
 $chidoan = $department[0]; 
 $role = $data['role']; 
 $yearin = $data['yearin'];
+$id_admin = $data['insert_admin'];
 
 $hash_pass = password_hash($pass, PASSWORD_DEFAULT);
 
@@ -49,6 +50,13 @@ $stmt = $conn->prepare("INSERT INTO doanvien (id, ho_ten, gioi_tinh, ngay_sinh, 
 $stmt->bind_param("isssiissssis", $id, $name, $gender, $birth, $userClass, $chidoan, $department, $email, $phone, $role, $yearin, $hash_pass);
 
 if ($stmt->execute()) {
+    // Insert notification
+    $noidung = "thêm vào đoàn viên " . $id;
+    $stmt_notify = $conn->prepare("INSERT INTO thongbao (id_actor, loai, noidung, id_affected) VALUES (?, 'insert', ?, ?)");
+    $stmt_notify->bind_param("isi", $id_admin, $noidung, $id);
+    $stmt_notify->execute();
+    $stmt_notify->close();
+
     echo json_encode(["success" => true, "message" => "Thêm tài khoản thành công"]);
 } else {
     echo json_encode(["success" => false, "message" => "Lỗi khi thêm tài khoản: " . $stmt->error]);

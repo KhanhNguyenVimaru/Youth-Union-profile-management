@@ -20,10 +20,10 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Hoạt động</a>
+                <a class="nav-link">Hoạt động</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Thông báo</a>
+                <a class="nav-link" onclick="loadPage('notify_page.php')">Thông báo</a>
             </li>
         </ul>
 
