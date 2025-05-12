@@ -27,7 +27,7 @@ $id = $data['id'];
 $pass = $data['password'];
 $email = trim($data['email']);
 $phone = trim($data['phone']);
-$gender = $data['gender'];
+$gender = $data['gender'] === 'nam' ? 'Nam' : 'Nữ'; // Convert to proper case
 $birth = $data['birthdate'];
 $userClass = $data['userClass']; 
 $department = $data['department'];

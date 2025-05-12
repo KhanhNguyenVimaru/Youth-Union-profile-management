@@ -15,7 +15,7 @@ document.getElementById("insert-user-btn").addEventListener("click", function ()
 
 
     if (!id || !ten || !email || !phone || gender === "none" || userClass === "0" || department === "none" || role === "none" || birthdate === "" || yearin === "none") {
-        alert("Vui lòng điền đầy đủ tất cả các trường!");
+        alert("Vui lòng điền đầy đủ thông tin!");
         return;
     }
 
@@ -264,7 +264,7 @@ function getUserData(id) {
             console.log(user);
             document.getElementById("show-user-id").value = user.doanvien_id;
             document.getElementById("show-user-name").value = user.ho_ten;
-            document.getElementById("show-user-gender").value = user.gioi_tinh.toLowerCase() === "nữ" ? "nu" : "nam";
+            document.getElementById("show-user-gender").value = user.gioi_tinh;
             document.getElementById("show-user-birthdate").value = user.ngay_sinh;
             document.getElementById("show-user-depart").value = user.khoa;
             document.getElementById("show-user-email").value = user.email;

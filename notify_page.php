@@ -43,11 +43,11 @@
 
             .notify-bar {
                 background-color: #f8f9fa;
-                padding: 20px 50px;
+                padding: 10px 50px;
                 border-radius: 8px;
                 font-weight: normal;
                 font-size: 1rem;
-                height: 90vh;
+                height: auto;
             }
 
             #database-handle {
@@ -66,7 +66,7 @@
                 background-color: #f8f9fa;
             }
 
-            .pagination-container {
+            .container {
                 display: flex;
                 justify-content: center;
                 margin-top: 20px;
@@ -108,22 +108,83 @@
                             <!-- Kết quả sẽ được chèn vào đây bởi AJAX -->
                         </tbody>
                     </table>
-                    <div class="pagination-container">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination" id="pagination-controls">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous" id="prev-page">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next" id="next-page">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                </div>
+                <!-- Add pagination controls -->
+                <nav aria-label="Page navigation" class="mt-3">
+                    <ul class="pagination justify-content-center" id="pagination-controls">
+                        <li class="page-item">
+                            <a class="page-link" href="#" id="prev-page" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <!-- Page numbers will be inserted here -->
+                        <li class="page-item">
+                            <a class="page-link" href="#" id="next-page" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Add Filter Modal -->
+        <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="filterModalLabel">BỘ LỌC THÔNG BÁO</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="startDate" class="form-label">Từ ngày:</label>
+                            <input type="date" class="form-control" id="startDate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="endDate" class="form-label">Đến ngày:</label>
+                            <input type="date" class="form-control" id="endDate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="activityType" class="form-label">Loại hoạt động:</label>
+                            <select class="form-select" id="activityType">
+                                <option value="all">Tất cả</option>
+                                <option value="insert">Thêm mới</option>
+                                <option value="change">Cập nhật</option>
+                                <option value="delete">Xóa</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="searchContent" class="form-label">Tìm kiếm nội dung:</label>
+                            <input type="text" class="form-control" id="searchContent" placeholder="Nhập từ khóa...">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary" id="applyFilter">Áp dụng</button>
+                    </div>
+                    // ... existing code ...
+                    </table>
+                </div>
+                <!-- Add pagination controls -->
+                <nav aria-label="Page navigation" class="mt-3">
+                    <ul class="pagination justify-content-center" id="pagination-controls">
+                        <li class="page-item">
+                            <a class="page-link" href="#" id="prev-page" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <!-- Page numbers will be inserted here -->
+                        <li class="page-item">
+                            <a class="page-link" href="#" id="next-page" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+// ... existing code ...
                 </div>
             </div>
         </div>

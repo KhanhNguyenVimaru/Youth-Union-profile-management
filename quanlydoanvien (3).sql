@@ -70,7 +70,7 @@ CREATE TABLE `doanphi` (
 CREATE TABLE `doanvien` (
   `id` int(11) NOT NULL,
   `ho_ten` varchar(100) NOT NULL,
-  `gioi_tinh` enum('Nam','Nữ','Khác') NOT NULL,
+  `gioi_tinh` enum('Nam','Nữ') NOT NULL,
   `ngay_sinh` date DEFAULT NULL,
   `lop_id` int(11) DEFAULT NULL,
   `chidoan_id` int(11) DEFAULT NULL,

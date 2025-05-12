@@ -20,7 +20,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link">Hoạt động</a>
+                <a class="nav-link" onclick="loadPage('show_event.php')">Hoạt động</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" onclick="loadPage('notify_page.php')">Thông báo</a>

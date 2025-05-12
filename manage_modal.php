@@ -27,8 +27,8 @@
                     </div>
                     <select name="gender" id="gender">
                         <option value="none">Giới tính</option>
-                        <option value="nam">Nam</option>
-                        <option value="nu">Nữ</option>
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
                     </select>
                 </div>
 
@@ -213,8 +213,8 @@
                         </div>
                         <select name="show-user-gender" id="show-user-gender">
                             <option value="none">Giới tính</option>
-                            <option value="nam">Nam</option>
-                            <option value="nu">Nữ</option>
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
                         </select>
                     </div>
 
