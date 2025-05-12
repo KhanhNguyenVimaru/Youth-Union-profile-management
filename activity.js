@@ -111,6 +111,7 @@ async function saveActivity() {
     const formData = new FormData(form);
     // Thêm id_actor từ localStorage
     formData.append('id_actor', localStorage.getItem('myID'));
+    console.log(formData);
     
     try {
         const response = await fetch('save_activity.php', {

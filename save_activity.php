@@ -2,6 +2,9 @@
 // Include database connection
 require_once 'config.php';
 
+// Start session (only once)
+session_start();
+
 // Set header to return JSON response
 header('Content-Type: application/json');
 
@@ -22,7 +25,18 @@ $diem = isset($_POST['diem']) ? $_POST['diem'] : 0;
 $dia_diem = isset($_POST['dia_diem']) ? $_POST['dia_diem'] : null;
 $loai_hoat_dong = $_POST['loai_hoat_dong'];
 $so_luong_tham_gia = isset($_POST['so_luong_tham_gia']) ? $_POST['so_luong_tham_gia'] : 0;
-$id_actor = isset($_POST['id_actor']) ? intval($_POST['id_actor']) : 0;
+
+// Get the actor ID from session
+$id_actor = isset($_SESSION['id']) ? $_SESSION['id'] : 0; // Assuming the session stores 'id_actor'
+
+// Check if session 'id_actor' is not set
+if ($id_actor == 0) {
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'User not logged in'
+    ]);
+    exit;
+}
 
 try {
     // Start transaction
@@ -54,7 +68,7 @@ try {
         $dia_diem,         // varchar(255)
         $loai_hoat_dong,   // varchar(100)
         $so_luong_tham_gia,// int(11)
-        $id_actor          // int(11) - sử dụng id_actor làm nguoi_tao
+        $id_actor          // int(11) - sử dụng id_actor lấy từ session
     );
 
     // Execute the statement
@@ -63,7 +77,7 @@ try {
         
         // Insert notification
         $noidung = "thêm hoạt động " . $activity_id;
-        $stmt_notify = $conn->prepare("INSERT INTO thongbao (id_actor, loai, noidung, id_affected) VALUES (?, 'insert', ?, ?)");
+        $stmt_notify = $conn->prepare("INSERT INTO thongbao (id_actor, loai, noidung, id_affected) VALUES (?, 'insert_event', ?, ?)");
         $stmt_notify->bind_param("isi", $id_actor, $noidung, $activity_id);
         $stmt_notify->execute();
         $stmt_notify->close();
