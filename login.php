@@ -31,6 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     } else {
+        echo "<script>
+                alert('sai tk mk');
+            </script>";
         header("Location: login.php");
         exit();
     }
@@ -60,9 +63,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span for="get-login-id">ĐĂNG NHẬP</span>
             <input type="text" name="get-login-id" placeholder="Nhập mã tài khoản" id="get-login-id" required>
             <input type="password" name="get-login-password" placeholder="Nhập mật khẩu" id="get-login-password" required>
-            <p>Quên mật khẩu, thực hiện <a href="">tại đây</a></p>
+            <p>Quên mật khẩu, thực hiện <a href="reset-password.php">tại đây</a></p>
             <button type="submit" class="btn btn-primary" id="sign-in-btn">Đăng nhập</button>
         </form>
     </div>
 </body>
+
 </html>
