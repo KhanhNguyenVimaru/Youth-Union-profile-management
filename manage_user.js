@@ -250,28 +250,35 @@ document.getElementById("show-data-here").addEventListener("click", function (e)
 });
 
 function getUserData(id) {
-    const userId = { id: id }; // hoặc viết gọn là { id }
+    const userId = { id: id };
 
     fetch("get_user_data.php", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userId)
     })
-    .then(response => response.json()) // cần có dấu () sau json
+    .then(response => response.json())
     .then(response => {
         if (response.success) {
             const user = response.data;
             console.log(user);
-            document.getElementById("show-user-id").value = user.doanvien_id;
-            document.getElementById("show-user-name").value = user.ho_ten;
-            document.getElementById("show-user-gender").value = user.gioi_tinh;
-            document.getElementById("show-user-birthdate").value = user.ngay_sinh;
-            document.getElementById("show-user-depart").value = user.khoa;
-            document.getElementById("show-user-email").value = user.email;
-            document.getElementById("show-user-tel").value = user.sdt;
-            document.getElementById("show-user-role").value = user.chuc_vu;
-            document.getElementById("show-user-year-in").value = user.nienkhoa;
-            document.getElementById("get-user-class-list").value = user.lop_id;
+            // Gán dữ liệu từ bảng doanvien
+            document.getElementById("show-user-id").value = user.doanvien_id || '';
+            document.getElementById("show-user-name").value = user.ho_ten || '';
+            document.getElementById("show-user-gender").value = user.gioi_tinh || 'none';
+            document.getElementById("show-user-birthdate").value = user.ngay_sinh || '';
+            document.getElementById("show-user-depart").value = user.khoa || 'none';
+            document.getElementById("show-user-email").value = user.email || '';
+            document.getElementById("show-user-tel").value = user.sdt || '';
+            document.getElementById("show-user-role").value = user.chuc_vu || 'none';
+            document.getElementById("show-user-year-in").value = user.nienkhoa || 'none';
+            document.getElementById("get-user-class-list").value = user.lop_id || '0';
+
+            // Gán dữ liệu từ bảng hoso
+            document.getElementById("show-day-join").value = user.ngay_vao_doan || '';
+            document.getElementById("show-location-join").value = user.noi_ket_nap || '';
+            document.getElementById("show-uni-city").value = user.noi_sinh_hoat_thanh_pho || '';
+            document.getElementById("show-uni-district").value = user.noi_sinh_hoat_quan_huyen || '';
         } else {
             console.error("Lỗi dữ liệu:", response);
         }
@@ -299,7 +306,11 @@ function saveDetailChanges() {
         sdt: document.getElementById('show-user-tel').value,
         chuc_vu: document.getElementById('show-user-role').value,
         nienkhoa: document.getElementById('show-user-year-in').value,
-        actor_id : localStorage.getItem("myID")
+        ngay_vao_doan: document.getElementById('show-day-join').value,
+        noi_ket_nap: document.getElementById('show-location-join').value,
+        noi_sinh_hoat_thanh_pho: document.getElementById('show-uni-city').value,
+        noi_sinh_hoat_quan_huyen: document.getElementById('show-uni-district').value,
+        actor_id: localStorage.getItem("myID")
     };
 
     // Create FormData object to handle file upload
@@ -334,6 +345,7 @@ function saveDetailChanges() {
         alert('Có lỗi xảy ra khi cập nhật thông tin');
     });
 }
+// Giữ nguyên các phần còn lại của file manager.js
 
 // Function to handle deleting user
 function deleteUser() {
