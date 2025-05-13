@@ -47,7 +47,7 @@ try {
         $noidung = "Đã xóa hoạt động ". $activity_id;
         
         // Insert notification for this action
-        $stmt_notify = $conn->prepare("INSERT INTO thongbao (id_actor, loai, noidung, id_affected) VALUES (?, 'delete', ?, ?)");
+        $stmt_notify = $conn->prepare("INSERT INTO thongbao (id_actor, loai, noidung, id_affected) VALUES (?, 'delete_event', ?, ?)");
         $stmt_notify->bind_param("isi", $id_actor, $noidung, $activity_id);
         $stmt_notify->execute();
         $stmt_notify->close();

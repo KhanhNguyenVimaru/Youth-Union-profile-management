@@ -177,15 +177,85 @@ async function viewActivity(id) {
     `;
 
     const participantsList = document.getElementById('participants-list');
-    if (activity.danh_sach_tham_gia) {
-        const participants = activity.danh_sach_tham_gia.split('; ');
-        participantsList.innerHTML = participants.map(p => `<p style="font-family: bahnschrift; font-size: 16px !important;">${p}</p>`).join('');
+    if (activity.participants && activity.participants.length > 0) {
+        participantsList.innerHTML = `
+            <table class="table table-bordered" style="font-family: bahnschrift; font-size: 16px !important;">
+                <thead>
+                    <tr>
+                        <th>ID Đoàn viên</th>
+                        <th>Họ tên</th>
+                        <th>ID Hoạt động</th>
+                        <th>Tên hoạt động</th>
+                        <th>Điểm riêng</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${activity.participants.map(participant => `
+                        <tr>
+                            <td>${participant.doanvien_id}</td>
+                            <td>${participant.ho_ten}</td>
+                            <td>${participant.hoatdong_id}</td>
+                            <td>${participant.ten_hoat_dong}</td>
+                            <td>
+                                <input type="number" class="form-control diem-rieng-input" 
+                                    data-doanvien-id="${participant.doanvien_id}" 
+                                    data-hoatdong-id="${participant.hoatdong_id}" 
+                                    value="${participant.diem_rieng}" 
+                                    style="width: 100px;"
+                                    onchange="updateDiemRieng(this)">
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-primary btn-sm" 
+                                    onclick="saveDiemRieng(${participant.doanvien_id}, ${participant.hoatdong_id})">
+                                    Lưu
+                                </button>
+                            </td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
     } else {
         participantsList.innerHTML = '<p style="font-family: bahnschrift; font-size: 16px !important;">Chưa có người tham gia</p>';
     }
 
     const modal = new bootstrap.Modal(document.getElementById('viewActivityModal'));
     modal.show();
+}
+
+// Function to update diem_rieng
+async function saveDiemRieng(doanvienId, hoatdongId) {
+    const input = document.querySelector(`input[data-doanvien-id="${doanvienId}"][data-hoatdong-id="${hoatdongId}"]`);
+    const diemRieng = parseInt(input.value) || 0;
+
+    try {
+        const formData = new FormData();
+        formData.append('doanvien_id', doanvienId);
+        formData.append('hoatdong_id', hoatdongId);
+        formData.append('diem_rieng', diemRieng);
+
+        const response = await fetch('update_diem_rieng.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const result = await response.json();
+        if (result.status === 'success') {
+            alert('Cập nhật điểm riêng thành công');
+            loadActivities(); // Reload activities to update data
+            viewActivity(currentActivityId); // Refresh the modal
+        } else {
+            throw new Error(result.message || 'Có lỗi xảy ra');
+        }
+    } catch (error) {
+        console.error('Error updating diem_rieng:', error);
+        alert('Có lỗi xảy ra khi cập nhật điểm riêng');
+    }
 }
 
 async function deleteActivity(id) {
@@ -219,12 +289,3 @@ async function deleteActivity(id) {
         alert('Có lỗi xảy ra khi xóa hoạt động');
     }
 }
-
-// function loadEditActivityModal(id) {
-//     if (!id) return;
-
-//     const activity = activities.find(a => a.id === id);
-//     if (!activity) return;
-
-//     alert('Chức năng chỉnh sửa đang được phát triển');
-// } 

@@ -153,8 +153,32 @@ document.addEventListener("DOMContentLoaded", async function () {
         }, 500);
     });
 
+    // Function to check if user has joined the event
+    async function hasJoinedEvent(userId, eventId) {
+        try {
+            const formData = new FormData();
+            formData.append('user_id', userId);
+            formData.append('event_id', eventId);
+
+            const response = await fetch('check_participation.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            return result.status === 'joined';
+        } catch (error) {
+            console.error('Error checking participation:', error);
+            return false;
+        }
+    }
+
     // Function to view event details
-    window.viewEventDetails = function(eventId) {
+    window.viewEventDetails = async function(eventId) {
         // Tìm hoạt động trong danh sách
         const event = allEvents.find(e => e.id === eventId);
         if (!event) {
@@ -175,15 +199,30 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         // Kiểm tra myRole từ localStorage
         const myRole = localStorage.getItem('myRole');
+        const userId = localStorage.getItem('myID');
         const modalFooter = document.querySelector('#detailModal .modal-footer');
+
+        // Kiểm tra trạng thái tham gia nếu là đoàn viên
+        let hasJoined = false;
+        if (myRole === 'doanvien' && userId) {
+            hasJoined = await hasJoinedEvent(userId, eventId);
+        }
+
         modalFooter.innerHTML = `
             <div class="d-flex justify-content-between w-100">
-                <div>
+                <div class="d-flex align-items-center">
                     ${myRole === 'admin' ? `
                         <button type="button" class="btn btn-outline-danger me-2" onclick="deleteActivity(${event.id})">Xóa</button>
                         ${event.trang_thai.toLowerCase() === 'chờ duyệt' ? `
-                        <button type="button" class="btn btn-outline-primary" onclick="approveEvent(${event.id})">Duyệt</button>
+                            <button type="button" class="btn btn-outline-primary me-2" onclick="approveEvent(${event.id})">Duyệt</button>
                         ` : ''}
+                    ` : myRole === 'doanvien' ? `
+                        ${hasJoined ? `
+                            <button type="button" class="btn btn-outline-danger me-2" onclick="leaveActivity(${event.id})">Thoát</button>
+                            <span style="font-family: Bahnschrift; font-size: 16px;">Bạn đã tham gia!</span>
+                        ` : `
+                            <button type="button" class="btn btn-outline-primary me-2" onclick="joinActivity(${event.id})">Tham gia</button>
+                        `}
                     ` : ''}
                 </div>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
@@ -259,6 +298,84 @@ document.addEventListener("DOMContentLoaded", async function () {
             }
         } catch (error) {
             console.error('Lỗi khi duyệt hoạt động:', error);
+        }
+    };
+
+    // Function to join activity
+    window.joinActivity = async function(eventId) {
+        const userId = localStorage.getItem('myID');
+        if (!userId) {
+            alert('Vui lòng đăng nhập để tham gia hoạt động!');
+            return;
+        }
+
+        try {
+            const formData = new FormData();
+            formData.append('user_id', userId);
+            formData.append('event_id', eventId);
+
+            const response = await fetch('join_activity.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            if (result.status === 'success') {
+                alert('Tham gia hoạt động thành công!');
+                await loadEvents(); // Tải lại danh sách hoạt động (nếu cần cập nhật)
+                displayEvents(allEvents); // Cập nhật giao diện
+                viewEventDetails(eventId); // Tải lại modal để cập nhật nút
+            } else {
+                throw new Error(result.message || 'Có lỗi xảy ra');
+            }
+        } catch (error) {
+            console.error('Error joining activity:', error);
+            alert('Có lỗi xảy ra khi tham gia hoạt động: ' + error.message);
+        }
+    };
+
+    // Function to leave activity
+    window.leaveActivity = async function(eventId) {
+        const userId = localStorage.getItem('myID');
+        if (!userId) {
+            alert('Vui lòng đăng nhập để rời hoạt động!');
+            return;
+        }
+
+        if (!confirm('Bạn có chắc chắn muốn rời hoạt động này?')) {
+            return;
+        }
+
+        try {
+            const formData = new FormData();
+            formData.append('user_id', userId);
+            formData.append('event_id', eventId);
+
+            const response = await fetch('leave_activity.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            if (result.status === 'success') {
+                alert('Rời hoạt động thành công!');
+                await loadEvents(); // Tải lại danh sách hoạt động (nếu cần cập nhật)
+                displayEvents(allEvents); // Cập nhật giao diện
+                viewEventDetails(eventId); // Tải lại modal để cập nhật nút
+            } else {
+                throw new Error(result.message || 'Có lỗi xảy ra');
+            }
+        } catch (error) {
+            console.error('Error leaving activity:', error);
+            alert('Có lỗi xảy ra khi rời hoạt động: ' + error.message);
         }
     };
 

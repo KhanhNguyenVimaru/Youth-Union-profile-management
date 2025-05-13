@@ -1,6 +1,11 @@
 <?php
 include 'config.php';
 header('Content-Type: application/json');
+session_start();
+
+// Lấy thông tin từ session
+$myId = $_SESSION['id'] ?? null;
+$myRole = $_SESSION['role'] ?? null;
 
 // Lấy dữ liệu từ POST
 $data = json_decode(file_get_contents('php://input'), true);
@@ -16,40 +21,51 @@ $sql = "SELECT * FROM thongbao WHERE 1=1";
 $params = [];
 $types = "";
 
-// Thêm điều kiện lọc theo khoảng thời gian
+// Lọc theo khoảng thời gian
 if (!empty($data['startDate'])) {
     $sql .= " AND DATE(thoigian) >= ?";
     $params[] = $data['startDate'];
     $types .= "s";
 }
-
 if (!empty($data['endDate'])) {
     $sql .= " AND DATE(thoigian) <= ?";
     $params[] = $data['endDate'];
     $types .= "s";
 }
 
-// Thêm điều kiện lọc theo loại hoạt động
+// Lọc theo loại hoạt động cụ thể
 if (!empty($data['activityType']) && $data['activityType'] !== 'all') {
     $sql .= " AND loai = ?";
     $params[] = $data['activityType'];
     $types .= "s";
 }
 
-// Thêm điều kiện tìm kiếm nội dung
+// Tìm kiếm nội dung
 if (!empty($data['searchContent'])) {
     $sql .= " AND noidung LIKE ?";
     $params[] = "%" . $data['searchContent'] . "%";
     $types .= "s";
 }
 
+// Thêm điều kiện theo vai trò người dùng
+if ($myRole === 'canbodoan' && $myId) {
+    $sql .= " AND loai IN (?, ?, ?, ?, ?, ?) AND (id_actor = ? OR id_affected = ?)";
+    $params = array_merge($params, ['approve', 'insert', 'change', 'delete', 'insert_event', 'delete_event', $myId, $myId]);
+    $types .= "ssssssii"; // 6 string, 2 integer
+}
+
+if ($myRole === 'doanvien' && $myId) {
+    $sql .= " AND loai IN (?, ?, ?, ?) AND (id_actor = ? OR id_affected = ?)";
+    $params = array_merge($params, ['approve', 'insert', 'delete', 'change', $myId, $myId]);
+    $types .= "ssssii"; // 4 string, 2 integer
+}
+
 // Sắp xếp theo thời gian giảm dần
 $sql .= " ORDER BY thoigian DESC";
 
-// Chuẩn bị và thực thi câu lệnh SQL
+// Chuẩn bị và thực thi
 $stmt = $conn->prepare($sql);
 
-// Bind parameters nếu có
 if (!empty($params)) {
     $stmt->bind_param($types, ...$params);
 }
@@ -57,16 +73,12 @@ if (!empty($params)) {
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Kiểm tra nếu có dữ liệu
+// Trả về kết quả
 if ($result->num_rows > 0) {
     $notifications = [];
-
-    // Lấy tất cả dữ liệu
     while ($row = $result->fetch_assoc()) {
         $notifications[] = $row;
     }
-
-    // Trả về dữ liệu dưới dạng JSON
     echo json_encode(['success' => true, 'data' => $notifications]);
 } else {
     echo json_encode(['success' => false, 'message' => 'Không có dữ liệu']);
@@ -74,4 +86,3 @@ if ($result->num_rows > 0) {
 
 $stmt->close();
 $conn->close();
-?>

@@ -1,52 +1,51 @@
 <?php
-header('Content-Type: application/json');
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// Include database connection
+require_once 'config.php';
 
-$host = 'localhost';
-$dbname = 'quanlydoanvien';
-$username = 'root';
-$password = '';
+// Set header to return JSON response
+header('Content-Type: application/json');
 
 try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Fetch all activities
+    $sql_activities = "SELECT * FROM hoatdong";
+    $stmt_activities = $conn->prepare($sql_activities);
+    $stmt_activities->execute();
+    $result_activities = $stmt_activities->get_result();
 
-    // Fetch hoạt động data with tham gia information
-    $sql = "SELECT 
-            h.id,
-            h.ten_hoat_dong,
-            h.ngay_to_chuc,
-            h.noi_dung,
-            h.diem,
-            h.dia_diem,
-            h.loai_hoat_dong,
-            h.so_luong_tham_gia,
-            h.ngay_tao,
-            h.nguoi_tao,
-            h.trang_thai,
-            COUNT(t.id) as so_nguoi_tham_gia,
-            GROUP_CONCAT(DISTINCT CONCAT(d.ho_ten, ' (', t.diem_rieng, ' điểm)') SEPARATOR '; ') as danh_sach_tham_gia
-            FROM hoatdong h
-            LEFT JOIN thamgia t ON h.id = t.hoatdong_id
-            LEFT JOIN doanvien d ON t.doanvien_id = d.id
-            GROUP BY h.id
-            ORDER BY h.ngay_to_chuc DESC";
-            
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $hoatdong = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $activities = [];
+    while ($activity = $result_activities->fetch_assoc()) {
+        // Fetch participants for this activity
+        $sql_participants = "
+            SELECT t.doanvien_id, t.hoatdong_id, t.diem_rieng, d.ho_ten, h.ten_hoat_dong
+            FROM thamgia t
+            JOIN doanvien d ON t.doanvien_id = d.id
+            JOIN hoatdong h ON t.hoatdong_id = h.id
+            WHERE t.hoatdong_id = ?
+        ";
+        $stmt_participants = $conn->prepare($sql_participants);
+        $stmt_participants->bind_param("i", $activity['id']);
+        $stmt_participants->execute();
+        $result_participants = $stmt_participants->get_result();
 
-    // Return the data as JSON
-    echo json_encode($hoatdong, JSON_UNESCAPED_UNICODE);
+        $participants = [];
+        while ($participant = $result_participants->fetch_assoc()) {
+            $participants[] = $participant;
+        }
 
-} catch(PDOException $e) {
-    // Return error message if something goes wrong
-    http_response_code(500);
-    echo json_encode([
-        'error' => $e->getMessage(),
-        'sql' => $sql ?? null,
-        'trace' => $e->getTraceAsString()
-    ], JSON_UNESCAPED_UNICODE);
+        // Add participants to activity data
+        $activity['participants'] = $participants;
+        $activities[] = $activity;
+
+        $stmt_participants->close();
+    }
+
+    $stmt_activities->close();
+    $conn->close();
+
+    // Return activities with participants
+    echo json_encode($activities);
+
+} catch (Exception $e) {
+    echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
 }
-?> 
+?>

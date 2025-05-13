@@ -184,11 +184,6 @@
                 </nav>
             </div>
         </div>
-// ... existing code ...
-                </div>
-            </div>
-        </div>
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="index.js"></script>
         <script src="load_notify.js"></script>

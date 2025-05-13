@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 11, 2025 lúc 08:49 PM
+-- Thời gian đã tạo: Th5 13, 2025 lúc 04:00 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -70,7 +70,7 @@ CREATE TABLE `doanphi` (
 CREATE TABLE `doanvien` (
   `id` int(11) NOT NULL,
   `ho_ten` varchar(100) NOT NULL,
-  `gioi_tinh` enum('Nam','Nữ') NOT NULL,
+  `gioi_tinh` enum('Nam','Nữ','Khác') NOT NULL,
   `ngay_sinh` date DEFAULT NULL,
   `lop_id` int(11) DEFAULT NULL,
   `chidoan_id` int(11) DEFAULT NULL,
@@ -87,12 +87,12 @@ CREATE TABLE `doanvien` (
 --
 
 INSERT INTO `doanvien` (`id`, `ho_ten`, `gioi_tinh`, `ngay_sinh`, `lop_id`, `chidoan_id`, `khoa`, `email`, `sdt`, `chuc_vu`, `nienkhoa`, `password`) VALUES
-(1, 'Nguyễn Văn A', 'Nam', '2002-05-14', 902, 9, 9, 'nguyenvana@example.com', '0912345678', 'doanvien', 63, 'pass123'),
+(1, 'Nguyễn Văn A', 'Nữ', '2002-05-14', 203, 2, 2, 'nguyenvana@example.com', '0912345678', 'doanvien', 65, 'pass123'),
 (2, 'Trần Thị B', 'Nữ', '2001-08-20', 0, 2, 2, 'tranthib@example.com', '0912345679', 'doanvien', 64, 'pass123'),
-(3, 'Lê Văn C', 'Nam', '2002-11-02', 201, 2, 2, 'levanc@example.com', '0912345680', 'canbodoan', 65, 'pass123'),
+(3, 'Lê Văn C', 'Nam', '2002-11-02', 802, 8, 8, 'levanc@example.com', '0912345680', 'canbodoan', 64, 'pass123'),
 (4, 'Phạm Thị D', 'Nữ', '2001-06-30', 202, 2, 2, 'phamthid@example.com', '0912345681', 'doanvien', 62, 'pass123'),
 (5, 'Hoàng Văn E', 'Nam', '2003-03-25', 203, 2, 2, 'hoangvane@example.com', '0912345682', 'doanvien', 65, 'pass123'),
-(6, 'Đặng Thị F', 'Nữ', '2000-12-12', 201, 2, 2, 'dangthif@example.com', '0912345683', 'doanvien', 64, 'pass123'),
+(6, 'Đặng Thị F', 'Nữ', '2000-12-12', 601, 6, 6, 'dangthif@example.com', '0912345683', 'doanvien', 64, 'pass123'),
 (7, 'Bùi Văn G', 'Nam', '2002-01-10', 201, 2, 2, 'buivang@example.com', '0912345684', 'doanvien', 65, 'pass123'),
 (8, 'Vũ Thị H', 'Nữ', '2001-07-18', 303, 3, 3, 'vuthih@example.com', '0912345685', 'doanvien', 62, 'pass123'),
 (9, 'Đỗ Văn I', 'Nam', '2002-09-15', 401, 4, 4, 'dovani@example.com', '0912345686', 'canbodoan', 65, 'pass123'),
@@ -128,9 +128,8 @@ INSERT INTO `doanvien` (`id`, `ho_ten`, `gioi_tinh`, `ngay_sinh`, `lop_id`, `chi
 (39, 'Lâm Thị AM', 'Nữ', '2003-11-11', 903, 9, 9, 'lamthiam@example.com', '0912345716', 'admin', 65, 'pass123'),
 (40, 'Đoàn Văn AN', 'Nam', '2001-09-09', 902, 9, 9, 'doanvanan@example.com', '0912345717', 'doanvien', 62, 'pass123'),
 (101, 'Chu Thùy Dương', 'Nữ', '2006-03-02', 801, 8, 8, 'Duong0302@gmail.com', '0928564126', 'canbodoan', 65, '$2y$10$/wGi3yGC2cQt/dzDnnv76OJLN9WePa588v1/CjuduSicVCpJlS03y'),
-(102138, 'Hieu Ngu', 'Nam', '0000-00-00', 501, 5, 5, 'khanhnd05@gmail.com', '0928564126', 'admin', 63, '$2y$10$wL.SpObDlWa1mQCLq85WAua9DOOfqUjtdiD55fPCXMH1Z5REHtw9C'),
-(102151, 'Nguyen Khanh', 'Nam', '2005-11-04', 202, 2, 2, 'khanhnd05@gmail.com', '0928564126', 'admin', 64, '$2y$10$OKltxyFwl2Nj.dFy8AqfLONFtNE5K66Pr5o75LvijDo0kjXuoLycS'),
-(102152, 'Nguyen Khanh', 'Nam', '2005-11-04', 201, 2, 2, 'khanhnd05@gmail.com', '0928564126', 'admin', 64, '$2y$10$Q..ZwDWSQB/nelEKnXhFZuZisWW5M.tgtPlRXNtFM1Hj2aJs2wAYq');
+(102138, 'Hieu stupid', 'Nam', '2005-11-11', 202, 2, 2, 'khanhnd05@gmail.com', '0928564126', 'doanvien', 64, '$2y$10$TNUkpF9hWuZHPN7lu/rHJe1wNvHI3uIrM15zbTE7HazqXNlG9ay3u'),
+(102151, 'Nguyen Khanh', 'Nam', '2005-11-04', 701, 7, 7, 'khanhnd05@gmail.com', '0928564126', 'admin', 64, '$2y$10$X7NZO.5N6N4YhK.c5PN8huQ7kWIgZ1Y5A8q94gKhbDV/CwnWk5RE.');
 
 -- --------------------------------------------------------
 
@@ -157,7 +156,8 @@ CREATE TABLE `hoatdong` (
 --
 
 INSERT INTO `hoatdong` (`id`, `ten_hoat_dong`, `ngay_to_chuc`, `noi_dung`, `diem`, `dia_diem`, `loai_hoat_dong`, `so_luong_tham_gia`, `ngay_tao`, `nguoi_tao`, `trang_thai`) VALUES
-(25, 'Hè xanh 2025', '2025-05-22', 'hè xanh', 1000, 'Sơn La', 'Văn nghệ', 100, '2025-05-10 22:41:20', 1, 'chờ duyệt');
+(37, 'Hè xanh 2025', '2025-05-22', 'hehe', 100, 'Đại học Hàng hải Việt Nam', 'Tình nguyện', 100, '2025-05-13 00:46:09', 102151, 'đã duyệt'),
+(40, 'Hội khỏe Phù Đổng', '2025-05-28', 'Hội khỏe', 10, 'Đại học Hàng hải Việt Nam', 'Thể thao', 100, '2025-05-13 01:05:49', 102151, 'chờ duyệt');
 
 -- --------------------------------------------------------
 
@@ -240,9 +240,15 @@ CREATE TABLE `thamgia` (
   `id` int(11) NOT NULL,
   `doanvien_id` int(11) DEFAULT NULL,
   `hoatdong_id` int(11) DEFAULT NULL,
-  `diem_rieng` int(11) DEFAULT 0,
-  `ghi_chu` varchar(255) DEFAULT NULL
+  `diem_rieng` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `thamgia`
+--
+
+INSERT INTO `thamgia` (`id`, `doanvien_id`, `hoatdong_id`, `diem_rieng`) VALUES
+(1, 102138, 37, 0);
 
 -- --------------------------------------------------------
 
@@ -255,8 +261,55 @@ CREATE TABLE `thongbao` (
   `id_actor` int(11) DEFAULT NULL,
   `loai` varchar(50) DEFAULT NULL,
   `noidung` varchar(200) DEFAULT NULL,
-  `id_affected` int(11) DEFAULT NULL
+  `id_affected` int(11) DEFAULT NULL,
+  `thoigian` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `thongbao`
+--
+
+INSERT INTO `thongbao` (`id`, `id_actor`, `loai`, `noidung`, `id_affected`, `thoigian`) VALUES
+(29, 0, 'insert_event', 'thêm hoạt động 26', 26, '2025-05-12 14:16:59'),
+(30, 102151, 'change', 'sửa thông tin đoàn viên 1 (doanvien) [Giới tính: Nữ -> nu, Niên khóa: 64 -> 65]', 1, '2025-05-12 15:30:02'),
+(31, 0, 'delete', 'xóa hoạt động 25', 25, '2025-05-12 15:31:18'),
+(32, 0, 'insert', 'thêm hoạt động 27', 27, '2025-05-12 15:46:49'),
+(33, 0, 'insert', 'thêm hoạt động 28', 28, '2025-05-12 15:47:16'),
+(34, 0, 'delete', 'xóa hoạt động 28', 28, '2025-05-12 15:47:22'),
+(35, 0, 'delete', 'xóa hoạt động 27', 27, '2025-05-12 15:47:25'),
+(36, 0, 'delete', 'xóa hoạt động 26', 26, '2025-05-12 16:03:02'),
+(37, 102151, 'insert', 'thêm hoạt động 29', 29, '2025-05-12 16:05:15'),
+(38, 102151, 'insert', 'thêm hoạt động 30', 30, '2025-05-12 16:06:18'),
+(39, 102151, 'insert_event', 'thêm hoạt động 31', 31, '2025-05-12 16:10:21'),
+(40, 0, 'delete', 'xóa hoạt động 29', 29, '2025-05-12 16:10:33'),
+(41, 102151, 'insert_event', 'Thêm hoạt động mới với ID: 32', 32, '2025-05-12 16:14:18'),
+(42, 102151, 'delete', 'Đã xóa hoạt động với ID: 32', 32, '2025-05-12 16:16:20'),
+(43, 102151, 'insert', 'thêm vào đoàn viên 102138', 102138, '2025-05-12 16:18:22'),
+(44, 102151, 'delete', 'Đã xóa hoạt động 30', 30, '2025-05-12 16:19:17'),
+(45, 102151, 'change', 'sửa thông tin đoàn viên 102151 (doanvien) [Giới tính: Nam -> nam, Lớp: 202 -> 701, Chi đoàn: 2 -> 7, Khoa: 2 -> 7]', 102151, '2025-05-12 16:21:42'),
+(46, 102151, 'insert_event', 'thêm hoạt động 33', 33, '2025-05-12 23:09:57'),
+(47, 102151, 'approve', 'Duyệt hoạt động 31', 31, '2025-05-13 00:18:54'),
+(48, 102151, 'approve', 'Duyệt hoạt động 33', 33, '2025-05-13 00:20:53'),
+(49, 102151, 'delete', 'Đã xóa hoạt động 31', 31, '2025-05-13 00:21:27'),
+(50, 102151, 'delete', 'Đã xóa hoạt động 33', 33, '2025-05-13 00:21:29'),
+(51, 102151, 'insert_event', 'thêm hoạt động 34', 34, '2025-05-13 00:22:46'),
+(52, 102151, 'approve', 'Duyệt hoạt động 34', 34, '2025-05-13 00:23:28'),
+(53, 102151, 'delete', 'Đã xóa hoạt động 34', 34, '2025-05-13 00:26:00'),
+(54, 102151, 'insert_event', 'thêm hoạt động 35', 35, '2025-05-13 00:26:24'),
+(55, 102151, 'approve', 'Duyệt hoạt động 35', 35, '2025-05-13 00:26:29'),
+(56, 102151, 'delete', 'Đã xóa hoạt động 35', 35, '2025-05-13 00:43:47'),
+(57, 102151, 'insert_event', 'thêm hoạt động 36', 36, '2025-05-13 00:45:15'),
+(58, 102151, 'approve', 'Duyệt hoạt động 36', 36, '2025-05-13 00:45:20'),
+(59, 102151, 'delete', 'Đã xóa hoạt động 36', 36, '2025-05-13 00:45:39'),
+(60, 102151, 'insert_event', 'thêm hoạt động 37', 37, '2025-05-13 00:46:09'),
+(61, 102151, 'approve', 'Duyệt hoạt động 37', 37, '2025-05-13 00:46:19'),
+(62, 102151, 'insert_event', 'thêm hoạt động 38', 38, '2025-05-13 00:52:48'),
+(63, 102151, 'delete', 'Đã xóa hoạt động 38', 38, '2025-05-13 00:52:59'),
+(64, 102151, 'insert_event', 'thêm hoạt động 39', 39, '2025-05-13 00:53:54'),
+(65, 102151, 'approve', 'Duyệt hoạt động 39', 39, '2025-05-13 00:53:59'),
+(66, 102151, 'delete', 'Đã xóa hoạt động 39', 39, '2025-05-13 00:54:06'),
+(67, 102151, 'insert_event', 'thêm hoạt động 40', 40, '2025-05-13 01:05:49'),
+(68, 102151, 'change', 'sửa thông tin đoàn viên 102138 (doanvien) [Chức vụ: admin -> doanvien]', 102138, '2025-05-13 01:13:38');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -335,7 +388,7 @@ ALTER TABLE `doanphi`
 -- AUTO_INCREMENT cho bảng `hoatdong`
 --
 ALTER TABLE `hoatdong`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT cho bảng `hoso`
@@ -353,13 +406,13 @@ ALTER TABLE `lop`
 -- AUTO_INCREMENT cho bảng `thamgia`
 --
 ALTER TABLE `thamgia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `thongbao`
 --
 ALTER TABLE `thongbao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
