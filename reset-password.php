@@ -134,6 +134,39 @@ $stage = $_GET["stage"] ?? "request";
     <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/vi/0/09/Huy_Hi%E1%BB%87u_%C4%90o%C3%A0n.png">
     <title>Đặt lại mật khẩu</title>
     <link rel="stylesheet" href="login.css">
+    <style>
+        :root {
+            --mainBlue: #2832c2;
+            --baseFont: bahnschrift;
+            --fontGray: #6a6a6a;
+            --backGroundGray: #dddddd;
+            --whiteGray: #f2f3f5;
+        }
+        body{
+            font-family: var(--baseFont) !important;
+        }
+
+        #reset-id {
+            height: 40px;
+            padding: 10px;
+            margin: 20px;
+            margin-top: 5px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid var(--fontGray);
+        }
+        input {
+            height: 40px;
+            padding: 10px;
+            margin: 20px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid var(--fontGray);
+
+        }
+    </style>
 </head>
 
 <body>
@@ -145,7 +178,7 @@ $stage = $_GET["stage"] ?? "request";
                 </div>
                 <span>QUÊN MẬT KHẨU</span>
                 <p>Nhập mã tài khoản của bạn để nhận mã xác nhận</p>
-                <input type="text" name="reset-id" placeholder="Nhập mã tài khoản" required>
+                <input type="text" name="reset-id" id="reset-id" placeholder="Nhập mã tài khoản" required>
                 <button type="submit" name="request-reset" class="btn btn-primary">Gửi mã xác nhận</button>
                 <p><a href="login.php">Quay lại đăng nhập</a></p>
             </form>
@@ -158,7 +191,7 @@ $stage = $_GET["stage"] ?? "request";
                 <input type="text" name="reset-token" placeholder="Nhập mã xác nhận" required>
                 <input type="password" name="new-password" placeholder="Mật khẩu mới" required>
                 <input type="password" name="confirm-password" placeholder="Xác nhận mật khẩu mới" required>
-                <button type="submit" name="verify-reset" class="btn btn-primary">Đặt lại mật khẩu</button>
+                <button type="submit" name="verify-reset" class="btn btn-primary" style="margin-top: 15px;width:200px">Đặt lại mật khẩu</button>
                 <p><a href="login.php">Quay lại đăng nhập</a></p>
             </form>
         <?php endif; ?>

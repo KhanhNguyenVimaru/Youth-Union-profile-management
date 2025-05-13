@@ -136,13 +136,11 @@ $stmt->close();
                     <div class="option-selection" id="option-personal"><i class="bi bi-person" onclick="loadPage('account.php')"></i>TÀI KHOẢN</div>
                 </a>
             </div>
-            <?php if ($userRole === 'admin'): ?>
             <div class="col-md-3">
                 <a style="text-decoration: none;">
                     <div class="option-selection" id="option-personal"><i class="bi bi-list-check" onclick="loadPage('Manage.php')"></i>QUẢN LÝ</div>
                 </a>
             </div>
-            <?php endif; ?>
             <div class="col-md-3">
                 <a style="text-decoration: none;">
                     <div class="option-selection" id="option-group"><i class="bi bi-list-task"></i>HOẠT ĐỘNG</div>

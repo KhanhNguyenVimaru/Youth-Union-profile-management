@@ -15,7 +15,7 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" onclick="loadPage('Manage.php')">Quản lý Đoàn viên</a></li>
                     <li><a class="dropdown-item" onclick="loadPage('manage_activity.php')">Quản lý hoạt động</a></li>
-                    <!-- <li><a class="dropdown-item" href="#">Thống kê & Báo cáo</a></li> -->
+                    <li><a class="dropdown-item" onclick="loadPage('stats_page.php')">Thống kê & Báo cáo</a></li>
                 </ul>
             </li>
 
