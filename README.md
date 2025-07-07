@@ -3,6 +3,10 @@ QuanLyHoSoDoan - Youth Union Profile Management System
 Description:
 A web application for managing Youth Union member profiles and tracking their participation in activities, with role-based access and scoring features.
 
+
+______________________________________________________________________________________________________
+
+
 Main Features:
 User and Activity Management (CRUD)
   * Create, update, delete users
