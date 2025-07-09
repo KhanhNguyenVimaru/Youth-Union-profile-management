@@ -51,3 +51,5 @@ Technology
 - PHP
 - HTML CSS JS
 - Bootstrap
+- MySQL (included)
+  
