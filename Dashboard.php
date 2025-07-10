@@ -1,5 +1,5 @@
 <?php
-session_start(); // ⚠️ BẮT BUỘC PHẢI CÓ
+session_start(); 
 
 // Kiểm tra đăng nhập
 if (!isset($_SESSION["id"]) || !isset($_SESSION["role"])) {
