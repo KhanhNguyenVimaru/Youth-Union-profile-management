@@ -38,12 +38,7 @@ Role-Specific Views
 
 ______________________________________________________________________________________________________
 
-- Middleware, show page/data by role
-- Create/delete activity, user follow/register activity on date
-- admin/youth union officer score each user join activity 
-- Chart show data of activity
-- Show user/system activity for each role 
-
+Admin account: 102151, password: 123456789
 
 ______________________________________________________________________________________________________
 
@@ -53,3 +48,4 @@ Technology
 - Bootstrap
 - MySQL (included)
   
+
