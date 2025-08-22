@@ -1,4 +1,4 @@
-# QuanLyHoSoDoan
+# Youth Union profile management
 
 A web application for managing Youth Union member profiles, tracking activity participation, and scoring members.  
 Built with **PHP**, **Bootstrap**, **MySQL**, and **JavaScript**.
@@ -24,3 +24,4 @@ Built with **PHP**, **Bootstrap**, **MySQL**, and **JavaScript**.
 - PHP 8.x
 - MySQL 8.x
 - Apache/Nginx
+
