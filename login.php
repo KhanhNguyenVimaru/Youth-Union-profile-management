@@ -27,14 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: Dashboard.php");
             exit();
         } else {
-            header("Location: login.php");
+            header("Location: login.php?error=1");
             exit();
         }
     } else {
         echo "<script>
                 alert('sai tk mk');
             </script>";
-        header("Location: login.php");
+        header("Location: login.php?error=1");
         exit();
     }
 }
@@ -55,6 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <?php if (isset($_GET['error'])): ?>
+        <script>alert('Sai tài khoản hoặc mật khẩu!');</script>
+    <?php endif; ?>
     <div id="main-container">
         <form id="fill-field" method="post" action="">
             <div>

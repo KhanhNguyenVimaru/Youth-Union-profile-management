@@ -237,19 +237,20 @@ const seletedUserID = {
 document.getElementById("show-data-here").addEventListener("click", function (e) {
     const clickedRow = e.target.closest(".st-data");
     if (clickedRow) {
-        const detail = document.getElementById("detail-data");
-        if (detail) {
-            let detailModal = new bootstrap.Modal(detail);
-            detailModal.show();
-            const idCell = clickedRow.querySelector(".show-user-id");
-            const id = idCell ? idCell.textContent.trim() : "NULL";
-            seletedUserID.id = id;
-            getUserData(id);
-        }
+        const idCell = clickedRow.querySelector(".show-user-id");
+        const id = idCell ? idCell.textContent.trim() : "NULL";
+        seletedUserID.id = id;
+        getUserData(id, function() {
+            const detail = document.getElementById("detail-data");
+            if (detail) {
+                let detailModal = new bootstrap.Modal(detail);
+                detailModal.show();
+            }
+        });
     }
 });
 
-function getUserData(id) {
+function getUserData(id, callback) {
     const userId = { id: id };
 
     fetch("get_user_data.php", {
@@ -261,7 +262,6 @@ function getUserData(id) {
     .then(response => {
         if (response.success) {
             const user = response.data;
-            console.log(user);
             // Gán dữ liệu từ bảng doanvien
             document.getElementById("show-user-id").value = user.doanvien_id || '';
             document.getElementById("show-user-name").value = user.ho_ten || '';
@@ -279,6 +279,7 @@ function getUserData(id) {
             document.getElementById("show-location-join").value = user.noi_ket_nap || '';
             document.getElementById("show-uni-city").value = user.noi_sinh_hoat_thanh_pho || '';
             document.getElementById("show-uni-district").value = user.noi_sinh_hoat_quan_huyen || '';
+            if (typeof callback === 'function') callback();
         } else {
             console.error("Lỗi dữ liệu:", response);
         }
