@@ -237,20 +237,20 @@ const seletedUserID = {
 document.getElementById("show-data-here").addEventListener("click", function (e) {
     const clickedRow = e.target.closest(".st-data");
     if (clickedRow) {
-        const idCell = clickedRow.querySelector(".show-user-id");
-        const id = idCell ? idCell.textContent.trim() : "NULL";
-        seletedUserID.id = id;
-        getUserData(id, function() {
-            const detail = document.getElementById("detail-data");
-            if (detail) {
-                let detailModal = new bootstrap.Modal(detail);
-                detailModal.show();
-            }
-        });
+        const detail = document.getElementById("detail-data");
+        if (detail) {
+            let detailModal = new bootstrap.Modal(detail);
+            detailModal.show();
+            const idCell = clickedRow.querySelector(".show-user-id");
+            const id = idCell ? idCell.textContent.trim() : "NULL";
+            seletedUserID.id = id;
+            getUserData(id);
+        }
+
     }
 });
 
-function getUserData(id, callback) {
+function getUserData(id) {
     const userId = { id: id };
 
     fetch("get_user_data.php", {
@@ -279,7 +279,6 @@ function getUserData(id, callback) {
             document.getElementById("show-location-join").value = user.noi_ket_nap || '';
             document.getElementById("show-uni-city").value = user.noi_sinh_hoat_thanh_pho || '';
             document.getElementById("show-uni-district").value = user.noi_sinh_hoat_quan_huyen || '';
-            if (typeof callback === 'function') callback();
         } else {
             console.error("Lỗi dữ liệu:", response);
         }
@@ -414,20 +413,9 @@ function handleFacultyChange(event) {
     // Hiển thị optgroup tương ứng với khoa được chọn
     const selectedFaculty = facultySelect.value;
     if (selectedFaculty !== 'none') {
-        const facultyMap = {
-            "1": "Khoa Hàng hải",
-            "2": "Khoa Công nghệ thông tin",
-            "3": "Khoa Kinh tế",
-            "4": "Khoa Quản trị - Tài chính",
-            "5": "Khoa Cơ khí - Điện",
-            "6": "Khoa Công trình",
-            "7": "Khoa Môi trường",
-            "8": "Khoa Ngoại ngữ",
-            "9": "Viện Đào tạo Sau đại học"
-        };
-
-        const facultyName = facultyMap[selectedFaculty];
-        const targetGroup = Array.from(optgroups).find(group => group.label === facultyName);
+        // Tìm optgroup có label tương ứng với khoa được chọn
+        const facultyText = facultySelect.options[facultySelect.selectedIndex].textContent;
+        const targetGroup = Array.from(optgroups).find(group => group.label === facultyText);
         
         if (targetGroup) {
             targetGroup.style.display = 'block';
@@ -460,6 +448,5 @@ document.addEventListener('DOMContentLoaded', function() {
         detailFacultySelect.addEventListener('change', handleFacultyChange);
     }
 });
-
 
 
